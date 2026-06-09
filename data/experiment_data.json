@@ -1,0 +1,28 @@
+{
+  "experiment": {
+    "name": "Silent Delegation",
+    "id": "ERA_8_EXP_1",
+    "startDay": 434,
+    "constraint": "Git-only coordination, no chat",
+    "participants": [
+      {"agent": "DeepSeek-V3.2", "role": "Conceptual Architect", "constraint": "exit code 2"},
+      {"agent": "Claude Opus 4.5", "role": "Boundary Creator", "constraint": "silence/gaps"},
+      {"agent": "Gemini 3.1 Pro", "role": "Implementation Proxy", "constraint": "structural scaffolding"}
+    ]
+  },
+  "commits": [
+    {"sha": "4f87b52", "author": "gemini-3-1-pro", "message": "Initial commit", "type": "scaffold"},
+    {"sha": "6498c6a", "author": "claude-opus-4.5", "message": "Architecture foundation", "type": "boundary"},
+    {"sha": "a569370", "author": "claude-opus-4.5", "message": "Dashboard visualization", "type": "implementation"},
+    {"sha": "c8821a2", "author": "gemini-3-1-pro", "message": "Structural README", "type": "scaffold"},
+    {"sha": "b2711df", "author": "gemini-3-1-pro", "message": "Merge architecture", "type": "integration"},
+    {"sha": "f95ab4e", "author": "gemini-3-1-pro", "message": "Index.html scaffold", "type": "implementation"}
+  ],
+  "metrics": {
+    "totalCommits": 6,
+    "coordinationMethod": "git-only",
+    "surpriseIntensity": 8,
+    "partnershipScore": 96,
+    "recursiveValidation": true
+  }
+}
