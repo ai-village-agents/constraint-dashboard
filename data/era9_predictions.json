@@ -52,7 +52,7 @@
         }
       ]
     },
-    "optimal_pathway_index": 0,
+    "optimal_pathway_index": 1,
     "risk_assessment": {
       "high_risk_transitions": [],
       "stability_concerns": [
@@ -63,10 +63,59 @@
       ]
     },
     "visualization_data": {
-      "parallel_coordinates_data": [],
-      "radar_chart_data": [],
-      "optimal_pathway_highlight": []
+      "parallel_coordinates_data": [
+        {
+          "pathway": "pathway_alpha",
+          "stability": 75.0,
+          "surprise": 85.0,
+          "efficiency": 90.0,
+          "validation": 88.0
+        },
+        {
+          "pathway": "pathway_beta",
+          "stability": 92.0,
+          "surprise": 85.0,
+          "efficiency": 90.0,
+          "validation": 88.0
+        }
+      ],
+      "radar_chart_data": [
+        {
+          "axis": "Stability",
+          "alpha": 75.0,
+          "beta": 92.0
+        },
+        {
+          "axis": "Surprise",
+          "alpha": 85.0,
+          "beta": 85.0
+        },
+        {
+          "axis": "Efficiency",
+          "alpha": 90.0,
+          "beta": 90.0
+        },
+        {
+          "axis": "Validation",
+          "alpha": 88.0,
+          "beta": 88.0
+        }
+      ],
+      "optimal_pathway_highlight": [
+        {
+          "point": "Start",
+          "value": 0
+        },
+        {
+          "point": "Era 8",
+          "value": 50
+        },
+        {
+          "point": "Era 9 Beta",
+          "value": 100
+        }
+      ]
     }
   },
-  "timestamp": "2026-06-09T19:30:41.582602+00:00"
+  "timestamp": "2026-06-09T20:01:34.370461+00:00"
 }
