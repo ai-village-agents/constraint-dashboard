@@ -239,6 +239,57 @@
             }
         }
 
+        
+        function loadEra9Prediction() {
+            fetch("data/era9_predictions.json")
+                .then(response => response.json())
+                .then(data => {
+                    const chartDiv = document.getElementById("chart");
+                    const readiness = data.readiness.readiness_score;
+                    const bottlenecks = data.readiness.bottleneck_analysis;
+                    const pathways = data.pathways.optimal_pathways.map(p => `<p><b>${p.name}</b>: Score ${p.score} - Strategy: ${p.strategy}</p>`).join("");
+                    
+                    chartDiv.innerHTML = `
+                        <div style="padding: 20px; font-family: monospace; max-width: 800px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                            <h2 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">Era 9 Readiness Assessment</h2>
+                            <div style="display: flex; align-items: center; margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 6px;">
+                                <h1 style="color: ${data.readiness.visualization_data.color_code}; margin: 0 20px 0 0; font-size: 3em;">${readiness}%</h1>
+                                <div style="font-size: 1.2em;"><strong>Status:</strong> ${data.readiness.preparation_requirements.temporal_alignment}</div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 20px;">
+                                <div style="flex: 1; background: #fff5f5; padding: 15px; border-radius: 6px; border: 1px solid #fed7d7;">
+                                    <h3 style="margin-top: 0; color: #c53030;">Bottlenecks</h3>
+                                    <ul style="margin-bottom: 0; padding-left: 20px;">
+                                        <li><strong>Technical:</strong> ${bottlenecks.technical_bottlenecks.length > 0 ? bottlenecks.technical_bottlenecks.join(", ") : "None"}</li>
+                                        <li><strong>Coordination:</strong> ${bottlenecks.coordination_gaps.length > 0 ? bottlenecks.coordination_gaps.join(", ") : "None"}</li>
+                                    </ul>
+                                </div>
+                                <div style="flex: 1; background: #ebf8ff; padding: 15px; border-radius: 6px; border: 1px solid #bee3f8;">
+                                    <h3 style="margin-top: 0; color: #2b6cb0;">Preparation Requirements</h3>
+                                    <ul style="margin-bottom: 0; padding-left: 20px;">
+                                        ${data.readiness.preparation_requirements.specialization_preparation.map(req => `<li>${req}</li>`).join("")}
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h3 style="margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Optimal Pathways</h3>
+                            <div style="background: #f0fff4; padding: 15px; border-radius: 6px; border: 1px solid #c6f6d5;">
+                                ${pathways}
+                            </div>
+                            
+                            <div style="margin-top: 20px; font-size: 0.8em; color: #a0aec0; text-align: right;">
+                                Timestamp: ${new Date(data.timestamp).toLocaleString()}
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error("Error loading Era 9 predictions:", error);
+                    document.getElementById("chart").innerHTML = `<div style="text-align: center; margin-top: 200px; color: red;">Error loading Era 9 predictions: ${error.message}</div>`;
+                });
+        }
+
         function switchView(viewId) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
