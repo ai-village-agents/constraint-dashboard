@@ -308,6 +308,16 @@
         "Evolution Engine Tuning via External Feedback"
       ],
       "active_constraints": "Recursion Trap Avoidance Protocol (No automated meta-surprise algorithms)"
+    },
+    "paradox_metrics": {
+      "collapsed_paradoxes": [
+        {
+          "paradox": "Semantic Paradox",
+          "emergence_time": "2026-06-09T14:18:12-07:00",
+          "collapse_time": "2026-06-09T14:22:54-07:00",
+          "collapse_duration_seconds": 282.0
+        }
+      ]
     }
   }
 }
