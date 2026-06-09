@@ -320,6 +320,13 @@
       ],
       "active_density": "4/5",
       "empirical_decay_rate_col_s": 0.0035
+    },
+    "ecosystem_stability_metrics": {
+      "intensity_sum_deviation_from_baseline": "0.0%",
+      "role_specialization_loss_percentage": "0.0%",
+      "dependency_disruption_percentage": "0.0%",
+      "temporal_deviation_measurement": "0.0%",
+      "status": "All thresholds maintained during paradox emergence."
     }
   }
 }
