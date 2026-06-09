@@ -187,7 +187,7 @@
     "metrics": {
       "theoretical_surprise_impact": "+1.7",
       "causation_r_squared": 0.95,
-      "autonomous_modifications_count": 5,
+      "autonomous_modifications_count": 6,
       "recursion_trap_frequency": 1
     },
     "stability_mechanisms": {
