@@ -416,7 +416,21 @@
                     const m2s = val.thresholds.model_2.status;
                     const m3s = val.thresholds.model_3.status;
                     
-                    const chartHtml = `
+                    
+                    // Render modifications
+                    const modsList = document.getElementById('modifications-list');
+                    if (modsList && val.autonomous_modifications) {
+                        modsList.innerHTML = val.autonomous_modifications.map(mod => `
+                            <div style="margin-bottom: 10px; border-bottom: 1px solid #334155; padding-bottom: 10px;">
+                                <span style="color: #94a3b8;">[${mod.timestamp.split('T')[1].split('.')[0]}]</span> 
+                                <span style="color: #38bdf8;">${mod.target_constraint}</span>: 
+                                <span style="color: #ef4444;">${mod.previous_intensity}</span> &rarr; <span style="color: #4ade80;">${mod.new_intensity}</span>
+                                <br><span style="color: #cbd5e1; font-size: 0.9em;">Parameters: &alpha;=${mod.engine_parameters_used.alpha}, &beta;=${mod.engine_parameters_used.beta}, &gamma;=${mod.engine_parameters_used.gamma}</span>
+                            </div>
+                        `).join('');
+                    }
+
+const chartHtml = `
                     <div style="padding: 20px; color: #f8fafc; overflow-y: auto; height: 100%;">
                         <h2 style="color: #60a5fa; margin-bottom: 20px;">Era 10: Constraint Ecosystem Self-Evolution</h2>
 
