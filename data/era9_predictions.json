@@ -317,7 +317,9 @@
           "collapse_time": "2026-06-09T14:22:54-07:00",
           "collapse_duration_seconds": 282.0
         }
-      ]
+      ],
+      "active_density": "4/5",
+      "empirical_decay_rate_col_s": 0.0035
     }
   }
 }
