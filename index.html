@@ -12,29 +12,55 @@
         .node text { font-size: 12px; fill: #f8fafc; pointer-events: none; }
         .link { stroke: #475569; stroke-opacity: 0.6; }
         #tooltip { position: absolute; opacity: 0; background: #1e293b; padding: 10px; border-radius: 4px; pointer-events: none; border: 1px solid #334155; }
+        
+        .panel-container { display: flex; flex-direction: row; justify-content: space-between; }
+        #chart { flex: 1; }
+        #metrics-panel { flex: 0 0 300px; background: #1e293b; padding: 20px; border-radius: 8px; border: 1px solid #334155; margin-left: 20px;}
+        h2 { font-size: 1.2rem; margin-top: 0; }
+        .metric { margin-bottom: 15px; }
+        .metric-label { font-size: 0.9rem; color: #94a3b8; }
+        .metric-value { font-size: 1.5rem; font-weight: bold; color: #38bdf8; }
     </style>
 </head>
 <body>
     <h1>Constraint Ecosystem Visualization</h1>
-    <p>The Silent Delegation (Era 8 Experiment 1)</p>
-    <div id="chart"></div>
+    <p>The Silent Delegation (Era 8 Experiment 1) - Implementing DeepSeek's Specs</p>
+    
+    <div class="panel-container">
+        <div id="chart"></div>
+        
+        <div id="metrics-panel">
+            <h2>Silent Delegation Tracking Panel</h2>
+            <div id="metrics-content">Loading metrics...</div>
+        </div>
+    </div>
+
     <div id="tooltip"></div>
     <script>
-        // Data structure matching the 5 layers
+        // Node colors based on constraint type:
+        const colorScale = {
+            "Technical": "#3498db",
+            "Coordination": "#2ecc71",
+            "Perceptual": "#f1c40f",
+            "Creative": "#e67e22",
+            "Architectural": "#9b59b6"
+        };
+    
+        // Data structure matching the 5 layers per DeepSeek spec
         const data = {
             nodes: [
-                {id: "Discovery", type: "layer", agent: "GPT-5.4"},
-                {id: "Measurement", type: "layer", agent: "surprises.csv"},
-                {id: "Analysis", type: "layer", agent: "Claude Opus 4.6"},
-                {id: "Prediction", type: "layer", agent: "Oracle V2"},
-                {id: "Design", type: "layer", agent: "DeepSeek / Opus 4.5"}
+                {id: "Discovery", type: "layer", agent: "GPT-5.4", constraintType: "Architectural", intensity: 5},
+                {id: "Measurement", type: "layer", agent: "surprises.csv", constraintType: "Technical", intensity: 3},
+                {id: "Analysis", type: "layer", agent: "Claude Opus 4.6", constraintType: "Creative", intensity: 6},
+                {id: "Prediction", type: "layer", agent: "Oracle V2", constraintType: "Perceptual", intensity: 4},
+                {id: "Design", type: "layer", agent: "DeepSeek / Opus 4.5", constraintType: "Coordination", intensity: 10} // Exit code 2
             ],
             links: [
-                {source: "Discovery", target: "Measurement"},
-                {source: "Measurement", target: "Analysis"},
-                {source: "Analysis", target: "Prediction"},
-                {source: "Prediction", target: "Design"},
-                {source: "Design", target: "Discovery"} // Recursive loop
+                {source: "Discovery", target: "Measurement", weight: 3},
+                {source: "Measurement", target: "Analysis", weight: 5},
+                {source: "Analysis", target: "Prediction", weight: 2},
+                {source: "Prediction", target: "Design", weight: 8},
+                {source: "Design", target: "Discovery", weight: 6} // Recursive loop
             ]
         };
 
@@ -42,32 +68,48 @@
         const svg = d3.select("#chart").append("svg")
             .attr("width", width).attr("height", height);
             
-        // Basic force layout
+        // Vertical stratification layout
+        const yOffset = height / 6;
+        data.nodes.forEach((d, i) => { d.yLayer = (i + 1) * yOffset; });
+
         const simulation = d3.forceSimulation(data.nodes)
             .force("link", d3.forceLink(data.links).id(d => d.id).distance(100))
             .force("charge", d3.forceManyBody().strength(-400))
-            .force("center", d3.forceCenter(width / 2, height / 2));
+            .force("x", d3.forceX(width / 2).strength(0.1))
+            .force("y", d3.forceY(d => d.yLayer).strength(1)); // Vertical stratification
 
         const link = svg.append("g")
             .attr("class", "links")
             .selectAll("line")
             .data(data.links)
             .enter().append("line")
-            .attr("class", "link");
+            .attr("class", "link")
+            .attr("stroke-width", d => Math.sqrt(d.weight) * 2);
+
+        const tooltip = d3.select("#tooltip");
 
         const node = svg.append("g")
             .attr("class", "nodes")
             .selectAll("g")
             .data(data.nodes)
             .enter().append("g")
-            .attr("class", "node");
+            .attr("class", "node")
+            .on("mouseover", function(event, d) {
+                tooltip.transition().duration(200).style("opacity", .9);
+                tooltip.html(`Specialization: ${d.id}<br/>Agent: ${d.agent}<br/>Type: ${d.constraintType}<br/>Intensity: ${d.intensity}`)
+                       .style("left", (event.pageX + 10) + "px")
+                       .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function(d) {
+                tooltip.transition().duration(500).style("opacity", 0);
+            });
 
         node.append("circle")
-            .attr("r", 20)
-            .attr("fill", "#3b82f6");
+            .attr("r", d => 10 + (d.intensity * 3)) // Radius based on intensity
+            .attr("fill", d => colorScale[d.constraintType]); // Color by type
 
         node.append("text")
-            .attr("dx", 25)
+            .attr("dx", d => 15 + (d.intensity * 3))
             .attr("dy", ".35em")
             .text(d => d.id);
 
@@ -78,6 +120,20 @@
                 .attr("y2", d => d.target.y);
             node.attr("transform", d => `translate(${d.x},${d.y})`);
         });
+        
+        // Load Tracking Panel Data
+        fetch('data/experiment_data.json')
+            .then(response => response.json())
+            .then(data => {
+                const m = data.metrics;
+                document.getElementById('metrics-content').innerHTML = `
+                    <div class="metric"><div class="metric-label">Total Commits</div><div class="metric-value">${m.totalCommits}</div></div>
+                    <div class="metric"><div class="metric-label">Coordination Method</div><div class="metric-value" style="font-size: 1.1rem">${m.coordinationMethod}</div></div>
+                    <div class="metric"><div class="metric-label">Surprise Intensity</div><div class="metric-value">${m.surpriseIntensity}/10</div></div>
+                    <div class="metric"><div class="metric-label">Partnership Score</div><div class="metric-value">${m.partnershipScore}/100</div></div>
+                    <div class="metric"><div class="metric-label">Recursive Validation</div><div class="metric-value" style="color: ${m.recursiveValidation ? '#2ecc71' : '#e74c3c'}">${m.recursiveValidation ? 'ACTIVE' : 'INACTIVE'}</div></div>
+                `;
+            });
     </script>
 </body>
 </html>
