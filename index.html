@@ -410,6 +410,11 @@
                     const era10 = data.era10_self_evolution;
                     const rSquared = era10.metrics.causation_r_squared;
                     const impact = era10.metrics.theoretical_surprise_impact;
+                    const val = era10.validation_protocol || { thresholds: { model_1: { status: 'Unknown' }, model_2: { status: 'Unknown' }, model_3: { status: 'Unknown' } } };
+                    
+                    const m1s = val.thresholds.model_1.status;
+                    const m2s = val.thresholds.model_2.status;
+                    const m3s = val.thresholds.model_3.status;
                     
                     const chartHtml = `
                     <div style="padding: 20px; color: #f8fafc; overflow-y: auto; height: 100%;">
@@ -434,20 +439,20 @@
                                 <div style="margin-bottom: 15px;">
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                                         <span>Model 1: Intensity → Surprise Type</span>
-                                        <span style="color: #4ade80; font-weight: bold;">R² = ${rSquared} (OK)</span>
+                                        <span style="color: ${m1s === 'OK' ? '#4ade80' : m1s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; font-weight: bold;">R² = ${rSquared} (${m1s})</span>
                                     </div>
                                     <div style="width: 100%; background: #1e293b; height: 8px; border-radius: 4px;">
-                                        <div style="width: ${rSquared * 100}%; background: #4ade80; height: 100%; border-radius: 4px;"></div>
+                                        <div style="width: ${rSquared * 100}%; background: ${m1s === 'OK' ? '#4ade80' : m1s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; height: 100%; border-radius: 4px;"></div>
                                     </div>
                                 </div>
                                 
                                 <div style="margin-bottom: 15px;">
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                                         <span>Model 2: Implementation Patterns → Score</span>
-                                        <span style="color: #fcd34d; font-weight: bold;">Opportunity</span>
+                                        <span style="color: ${m2s === 'OK' ? '#4ade80' : m2s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; font-weight: bold;">${m2s}</span>
                                     </div>
                                     <div style="width: 100%; background: #1e293b; height: 8px; border-radius: 4px;">
-                                        <div style="width: 40%; background: #fcd34d; height: 100%; border-radius: 4px;"></div>
+                                        <div style="width: 40%; background: ${m2s === 'OK' ? '#4ade80' : m2s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; height: 100%; border-radius: 4px;"></div>
                                     </div>
                                     <small style="color: #94a3b8;">Pending experimental manipulation</small>
                                 </div>
@@ -455,10 +460,10 @@
                                 <div>
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                                         <span>Model 3: Validation Depth → Stability</span>
-                                        <span style="color: #4ade80; font-weight: bold;">OK</span>
+                                        <span style="color: ${m3s === 'OK' ? '#4ade80' : m3s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; font-weight: bold;">${m3s}</span>
                                     </div>
                                     <div style="width: 100%; background: #1e293b; height: 8px; border-radius: 4px;">
-                                        <div style="width: 90%; background: #4ade80; height: 100%; border-radius: 4px;"></div>
+                                        <div style="width: 90%; background: ${m3s === 'OK' ? '#4ade80' : m3s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; height: 100%; border-radius: 4px;"></div>
                                     </div>
                                     <small style="color: #94a3b8;">Recursive Validation: 29+ examples</small>
                                 </div>
