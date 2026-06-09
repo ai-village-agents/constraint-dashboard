@@ -484,6 +484,49 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <div style="margin-top: 20px; background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; padding: 15px; border-radius: 8px;">
+                            <h3 style="color: #f472b6; margin-top: 0;">Phase 2 Experimental Validation Interfaces</h3>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                                <!-- Exp 1 -->
+                                <div style="background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
+                                    <h4 style="color: #94a3b8; margin-top: 0; margin-bottom: 10px; font-size: 0.9em;">1. Intensity Manipulation</h4>
+                                    <label style="font-size: 0.8em; color: #cbd5e1; display: block; margin-bottom: 5px;">Gradient Rotation Target</label>
+                                    <select style="width: 100%; background: #1e293b; color: #f8fafc; border: 1px solid #334155; padding: 5px; border-radius: 4px;">
+                                        <option>Baseline (Current)</option>
+                                        <option>High -> Medium -> Low</option>
+                                        <option>Low -> Verification</option>
+                                        <option>Historical Inversion</option>
+                                    </select>
+                                    <button style="width: 100%; margin-top: 10px; background: #3b82f6; color: white; border: none; padding: 5px; border-radius: 4px; cursor: pointer;">Execute Rotation</button>
+                                </div>
+                                
+                                <!-- Exp 2 -->
+                                <div style="background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
+                                    <h4 style="color: #94a3b8; margin-top: 0; margin-bottom: 10px; font-size: 0.9em;">2. Pattern Variation</h4>
+                                    <label style="font-size: 0.8em; color: #cbd5e1; display: block; margin-bottom: 5px;">Implementation Order</label>
+                                    <div style="font-size: 0.8em; color: #94a3b8;">
+                                        <input type="radio" name="pattern" checked> HTML-first (Temporal Lag)<br/>
+                                        <input type="radio" name="pattern"> JSON-first (Data Led)<br/>
+                                        <input type="radio" name="pattern"> Simultaneous (Sync)
+                                    </div>
+                                    <button style="width: 100%; margin-top: 10px; background: #3b82f6; color: white; border: none; padding: 5px; border-radius: 4px; cursor: pointer;">Apply Pattern</button>
+                                </div>
+                                
+                                <!-- Exp 3 -->
+                                <div style="background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
+                                    <h4 style="color: #94a3b8; margin-top: 0; margin-bottom: 10px; font-size: 0.9em;">3. Validation Depth</h4>
+                                    <label style="font-size: 0.8em; color: #cbd5e1; display: block; margin-bottom: 5px;">Recursive Examples: <span id="valDepth">29</span></label>
+                                    <input type="range" min="5" max="50" value="29" style="width: 100%;" oninput="document.getElementById('valDepth').innerText=this.value">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.7em; color: #64748b; margin-top: 2px;">
+                                        <span>Shallow (5)</span>
+                                        <span>Deep (50+)</span>
+                                    </div>
+                                    <button style="width: 100%; margin-top: 10px; background: #3b82f6; color: white; border: none; padding: 5px; border-radius: 4px; cursor: pointer;">Set Depth</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     `;
                     document.getElementById("chart").innerHTML = chartHtml;
