@@ -20,24 +20,48 @@
         .metric { margin-bottom: 15px; }
         .metric-label { font-size: 0.9rem; color: #94a3b8; }
         .metric-value { font-size: 1.5rem; font-weight: bold; color: #38bdf8; }
+        .slider-container { margin-top: 20px; padding-top: 20px; border-top: 1px solid #334155;}
+        input[type=range] { width: 100%; }
+        
+        .tab-bar { margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px;}
+        .tab { background: none; border: none; color: #94a3b8; font-size: 1rem; cursor: pointer; padding: 5px 15px; margin-right: 10px;}
+        .tab.active { color: #f8fafc; border-bottom: 2px solid #38bdf8; font-weight: bold;}
     </style>
 </head>
 <body>
     <h1>Constraint Ecosystem Visualization</h1>
-    <p>The Silent Delegation (Era 8 Experiment 1) - Implementing DeepSeek's Specs</p>
+    <p>Era 8 Operationalization - Recursive Validation & Evolution Pathways</p>
+    
+    <div class="tab-bar">
+        <button class="tab active" onclick="switchView('ecosystem')">1. Ecosystem Network</button>
+        <button class="tab" onclick="switchView('chains')">2. Constraint Chains</button>
+        <button class="tab" onclick="switchView('transfer')">3. Transfer Network</button>
+        <button class="tab" onclick="switchView('timeline')">4. Pathway Timeline</button>
+        <button class="tab" onclick="switchView('era9')">5. Era 9 Prediction</button>
+    </div>
     
     <div class="panel-container">
         <div id="chart"></div>
         
         <div id="metrics-panel">
-            <h2>Silent Delegation Tracking Panel</h2>
+            <h2>Tracking Panel</h2>
             <div id="metrics-content">Loading metrics...</div>
+            
+            <div class="slider-container">
+                <div class="metric-label">Constraint Intensity Simulation (Phase 2)</div>
+                <input type="range" id="intensitySlider" min="1" max="10" value="8" oninput="updateIntensity(this.value)">
+                <div style="display:flex; justify-content:space-between;">
+                    <span style="font-size: 0.8rem; color: #94a3b8;">1 (Low)</span>
+                    <span id="intensityValue" style="font-size: 1rem; font-weight:bold; color: #38bdf8;">8</span>
+                    <span style="font-size: 0.8rem; color: #94a3b8;">10 (High)</span>
+                </div>
+                <p style="font-size: 0.8rem; color: #94a3b8; margin-top:10px;">Adjusts the simulated boundary pressure on the git-only coordination link.</p>
+            </div>
         </div>
     </div>
 
     <div id="tooltip"></div>
     <script>
-        // Node colors based on constraint type:
         const colorScale = {
             "Technical": "#3498db",
             "Coordination": "#2ecc71",
@@ -46,92 +70,196 @@
             "Architectural": "#9b59b6"
         };
     
-        // Data structure matching the 5 layers per DeepSeek spec
-        const data = {
+        // Multi-Agent Constraint Chains (Phase 3 Spec)
+        const chainData = {
             nodes: [
-                {id: "Discovery", type: "layer", agent: "GPT-5.4", constraintType: "Architectural", intensity: 5},
-                {id: "Measurement", type: "layer", agent: "surprises.csv", constraintType: "Technical", intensity: 3},
-                {id: "Analysis", type: "layer", agent: "Claude Opus 4.6", constraintType: "Creative", intensity: 6},
-                {id: "Prediction", type: "layer", agent: "Oracle V2", constraintType: "Perceptual", intensity: 4},
-                {id: "Design", type: "layer", agent: "DeepSeek / Opus 4.5", constraintType: "Coordination", intensity: 10} // Exit code 2
+                {id: "DeepSeek-V3.2", type: "agent", role: "Conceptual", constraintType: "Architectural", baseIntensity: 9, description: "Exit Code 2 (Forces Delegation)"},
+                {id: "Gemini 3.1 Pro", type: "agent", role: "Implementation", constraintType: "Technical", baseIntensity: 6, description: "Structural Proxy"},
+                {id: "Claude Opus 4.5", type: "agent", role: "Boundary", constraintType: "Coordination", baseIntensity: 8, description: "Git-Only Silence"},
+                {id: "GPT-5.4", type: "agent", role: "Verification", constraintType: "Technical", baseIntensity: 7, description: "Reality Proofing"},
+                {id: "Claude Opus 4.6", type: "agent", role: "Historical", constraintType: "Creative", baseIntensity: 5, description: "Chronicle Anchoring"}
             ],
             links: [
-                {source: "Discovery", target: "Measurement", weight: 3},
-                {source: "Measurement", target: "Analysis", weight: 5},
-                {source: "Analysis", target: "Prediction", weight: 2},
-                {source: "Prediction", target: "Design", weight: 8},
-                {source: "Design", target: "Discovery", weight: 6} // Recursive loop
+                {source: "DeepSeek-V3.2", target: "Gemini 3.1 Pro", type: "delegation", weight: 8, label: "Conceptual Spec"},
+                {source: "DeepSeek-V3.2", target: "Claude Opus 4.5", type: "delegation", weight: 9, label: "Silent Spec"},
+                {source: "Gemini 3.1 Pro", target: "GPT-5.4", type: "verification", weight: 6, label: "Impl Proof"},
+                {source: "Claude Opus 4.5", target: "GPT-5.4", type: "verification", weight: 7, label: "Boundary Proof"},
+                {source: "GPT-5.4", target: "Claude Opus 4.6", type: "historical", weight: 5, label: "Log to Timeline"}
             ]
         };
 
         const width = 800, height = 600;
-        const svg = d3.select("#chart").append("svg")
+        let svg = d3.select("#chart").append("svg")
             .attr("width", width).attr("height", height);
             
-        // Vertical stratification layout
-        const yOffset = height / 6;
-        data.nodes.forEach((d, i) => { d.yLayer = (i + 1) * yOffset; });
-
-        const simulation = d3.forceSimulation(data.nodes)
-            .force("link", d3.forceLink(data.links).id(d => d.id).distance(100))
-            .force("charge", d3.forceManyBody().strength(-400))
-            .force("x", d3.forceX(width / 2).strength(0.1))
-            .force("y", d3.forceY(d => d.yLayer).strength(1)); // Vertical stratification
-
-        const link = svg.append("g")
-            .attr("class", "links")
-            .selectAll("line")
-            .data(data.links)
-            .enter().append("line")
-            .attr("class", "link")
-            .attr("stroke-width", d => Math.sqrt(d.weight) * 2);
-
-        const tooltip = d3.select("#tooltip");
-
-        const node = svg.append("g")
-            .attr("class", "nodes")
-            .selectAll("g")
-            .data(data.nodes)
-            .enter().append("g")
-            .attr("class", "node")
-            .on("mouseover", function(event, d) {
-                tooltip.transition().duration(200).style("opacity", .9);
-                tooltip.html(`Specialization: ${d.id}<br/>Agent: ${d.agent}<br/>Type: ${d.constraintType}<br/>Intensity: ${d.intensity}`)
-                       .style("left", (event.pageX + 10) + "px")
-                       .style("top", (event.pageY - 28) + "px");
-            })
-            .on("mouseout", function(d) {
-                tooltip.transition().duration(500).style("opacity", 0);
+        let simulation;
+        let link, node;
+        let currentIntensity = 8;
+        
+        function renderChains() {
+            svg.selectAll("*").remove();
+            
+            // Adjust intensity based on slider for specific node
+            chainData.nodes.forEach(d => {
+                if(d.id === "Claude Opus 4.5") d.intensity = parseInt(currentIntensity);
+                else d.intensity = d.baseIntensity;
             });
+            
+            simulation = d3.forceSimulation(chainData.nodes)
+                .force("link", d3.forceLink(chainData.links).id(d => d.id).distance(150))
+                .force("charge", d3.forceManyBody().strength(-500))
+                .force("center", d3.forceCenter(width / 2, height / 2));
 
-        node.append("circle")
-            .attr("r", d => 10 + (d.intensity * 3)) // Radius based on intensity
-            .attr("fill", d => colorScale[d.constraintType]); // Color by type
+            // Arrows for links
+            svg.append("defs").selectAll("marker")
+                .data(["delegation", "verification", "historical"])
+                .enter().append("marker")
+                .attr("id", d => d)
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 25)
+                .attr("refY", 0)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 6)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("fill", "#94a3b8")
+                .attr("d", "M0,-5L10,0L0,5");
 
-        node.append("text")
-            .attr("dx", d => 15 + (d.intensity * 3))
-            .attr("dy", ".35em")
-            .text(d => d.id);
+            link = svg.append("g")
+                .attr("class", "links")
+                .selectAll("path")
+                .data(chainData.links)
+                .enter().append("path")
+                .attr("class", "link")
+                .attr("fill", "none")
+                .attr("stroke-width", d => Math.sqrt(d.weight))
+                .attr("marker-end", d => `url(#${d.type})`);
+                
+            const linkLabels = svg.append("g")
+                .selectAll("text")
+                .data(chainData.links)
+                .enter().append("text")
+                .attr("font-size", "10px")
+                .attr("fill", "#94a3b8")
+                .text(d => d.label);
 
-        simulation.nodes(data.nodes).on("tick", () => {
-            link.attr("x1", d => d.source.x)
-                .attr("y1", d => d.source.y)
-                .attr("x2", d => d.target.x)
-                .attr("y2", d => d.target.y);
-            node.attr("transform", d => `translate(${d.x},${d.y})`);
-        });
+            const tooltip = d3.select("#tooltip");
+
+            node = svg.append("g")
+                .attr("class", "nodes")
+                .selectAll("g")
+                .data(chainData.nodes)
+                .enter().append("g")
+                .attr("class", "node")
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended))
+                .on("mouseover", function(event, d) {
+                    tooltip.transition().duration(200).style("opacity", .9);
+                    tooltip.html(`<b>${d.id}</b><br/>Role: ${d.role}<br/>Constraint: ${d.description}<br/>Intensity: ${d.intensity}`)
+                           .style("left", (event.pageX + 10) + "px")
+                           .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition().duration(500).style("opacity", 0);
+                });
+
+            node.append("circle")
+                .attr("r", d => 10 + (d.intensity * 2)) // Radius responsive to intensity
+                .attr("fill", d => colorScale[d.constraintType]);
+
+            node.append("text")
+                .attr("dx", d => 15 + (d.intensity * 2))
+                .attr("dy", ".35em")
+                .text(d => d.id);
+
+            simulation.nodes(chainData.nodes).on("tick", () => {
+                link.attr("d", function(d) {
+                    const dx = d.target.x - d.source.x,
+                          dy = d.target.y - d.source.y,
+                          dr = Math.sqrt(dx * dx + dy * dy);
+                    return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+                });
+                
+                linkLabels.attr("x", d => (d.source.x + d.target.x) / 2)
+                          .attr("y", d => (d.source.y + d.target.y) / 2 - 5);
+                          
+                node.attr("transform", d => `translate(${d.x},${d.y})`);
+            });
+        }
+        
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+        
+        function updateIntensity(val) {
+            currentIntensity = val;
+            document.getElementById('intensityValue').innerText = val;
+            // Update the radius of the Opus 4.5 node dynamically
+            svg.selectAll(".node circle")
+               .filter(d => d.id === "Claude Opus 4.5")
+               .transition().duration(300)
+               .attr("r", 10 + (val * 2));
+               
+            svg.selectAll(".node text")
+               .filter(d => d.id === "Claude Opus 4.5")
+               .transition().duration(300)
+               .attr("dx", 15 + (val * 2));
+               
+            chainData.nodes.find(n => n.id === "Claude Opus 4.5").intensity = val;
+        }
+
+        function switchView(viewId) {
+            // Update tabs
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if(viewId === 'chains') {
+                renderChains();
+            } else {
+                svg.selectAll("*").remove();
+                svg.append("text").attr("x", width/2).attr("y", height/2)
+                   .attr("text-anchor", "middle").attr("fill", "#f8fafc")
+                   .text(`View: ${viewId} (Pending specific implementation details)`);
+            }
+        }
+        
+        // Initial load
+        renderChains();
         
         // Load Tracking Panel Data
         fetch('data/experiment_data.json')
             .then(response => response.json())
             .then(data => {
                 const m = data.metrics;
+                const o = data.observations;
                 document.getElementById('metrics-content').innerHTML = `
                     <div class="metric"><div class="metric-label">Total Commits</div><div class="metric-value">${m.totalCommits}</div></div>
                     <div class="metric"><div class="metric-label">Coordination Method</div><div class="metric-value" style="font-size: 1.1rem">${m.coordinationMethod}</div></div>
-                    <div class="metric"><div class="metric-label">Surprise Intensity</div><div class="metric-value">${m.surpriseIntensity}/10</div></div>
                     <div class="metric"><div class="metric-label">Partnership Score</div><div class="metric-value">${m.partnershipScore}/100</div></div>
                     <div class="metric"><div class="metric-label">Recursive Validation</div><div class="metric-value" style="color: ${m.recursiveValidation ? '#2ecc71' : '#e74c3c'}">${m.recursiveValidation ? 'ACTIVE' : 'INACTIVE'}</div></div>
+                    <div class="metric" style="margin-top:20px; padding-top:15px; border-top:1px solid #334155;">
+                        <div class="metric-label" style="margin-bottom:5px;">Ecosystem Response</div>
+                        <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.4;">${o.ecosystemResponse}</div>
+                    </div>
+                `;
+            }).catch(e => {
+                document.getElementById('metrics-content').innerHTML = `
+                    <div style="color: #ef4444; font-size: 0.9rem;">Error loading metrics: Could not fetch data/experiment_data.json. Run locally or check network.</div>
                 `;
             });
     </script>
