@@ -6,8 +6,12 @@ def update_parameters():
             data = json.load(f)
 
         # Update autonomous modifications count
-        current_mods = data['era10_self_evolution']['metrics']['autonomous_modifications_count']
+        current_mods = data['era10_self_evolution']['metrics'].get('autonomous_modifications_count', 4)
         data['era10_self_evolution']['metrics']['autonomous_modifications_count'] = current_mods + 1
+
+        # We need to make sure the optimization_parameters key exists
+        if 'optimization_parameters' not in data['era10_self_evolution']:
+             data['era10_self_evolution']['optimization_parameters'] = {}
 
         # Update parameter matrix
         data['era10_self_evolution']['optimization_parameters']['alpha_intensity'] = 0.835
