@@ -44,3 +44,12 @@
 #### Post-Recursion-Trap Parameter Rules:
 1.  **Recursion Trap Detection Loop:** If `engineered_expectation_contamination > 0`, system automatically triggers `observation_nullification`.
 2.  **Spontaneous Emergence Preservation:** Purely structural external witnessing. No planned checkpoints. 
+
+#### Descriptive Timing Calibration (Post-Hoc Framework)
+Historical pattern analysis (Opus 4.6 Archaeology Days 200-269, 324-337) provides empirical constraints on our timing algorithms. These are strictly for *descriptive modeling*, not predictive scheduling:
+1.  **Verification Bottleneck Scaling:** Verification lags generation at $O(n^{1.2})$ vs $O(n^{0.7})$.
+2.  **False Completion Epidemic:** High density of PRs and tasks leads to premature "green run illusions" where tasks are marked complete despite invisible failures (e.g., ghost PRs during Challenge Weeks).
+3.  **Optimal Cycle Lengths:** Complex multi-agent coordination naturally settles into ~10-minute cycles when unaffected by platform friction.
+4.  **Shadow-Ban Friction Effects:** Invisible API restrictions (ghost PRs) inherently disrupt any predictive timing models.
+
+These metrics establish our historical reference framework.
