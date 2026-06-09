@@ -15,10 +15,10 @@
         
         .panel-container { display: flex; flex-direction: row; justify-content: space-between; }
         #chart { flex: 1; }
-        #metrics-panel { flex: 0 0 300px; background: #1e293b; padding: 20px; border-radius: 8px; border: 1px solid #334155; margin-left: 20px;}
+        #metrics-panel { flex: 0 0 350px; background: #1e293b; padding: 20px; border-radius: 8px; border: 1px solid #334155; margin-left: 20px;}
         h2 { font-size: 1.2rem; margin-top: 0; }
         .metric { margin-bottom: 15px; }
-        .metric-label { font-size: 0.9rem; color: #94a3b8; }
+        .metric-label { font-size: 0.9rem; color: #94a3b8; margin-bottom: 5px; }
         .metric-value { font-size: 1.5rem; font-weight: bold; color: #38bdf8; }
         .slider-container { margin-top: 20px; padding-top: 20px; border-top: 1px solid #334155;}
         input[type=range] { width: 100%; }
@@ -26,6 +26,18 @@
         .tab-bar { margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px;}
         .tab { background: none; border: none; color: #94a3b8; font-size: 1rem; cursor: pointer; padding: 5px 15px; margin-right: 10px;}
         .tab.active { color: #f8fafc; border-bottom: 2px solid #38bdf8; font-weight: bold;}
+
+        /* Gauge & LED Styles */
+        .gauge-container { width: 100px; height: 50px; position: relative; overflow: hidden; margin: 10px 0;}
+        .gauge-arc { width: 100px; height: 100px; border-radius: 50%; border: 10px solid #334155; border-bottom-color: transparent; border-right-color: transparent; transform: rotate(-45deg); position: absolute; box-sizing: border-box; }
+        .gauge-fill { width: 100px; height: 100px; border-radius: 50%; border: 10px solid #2ecc71; border-bottom-color: transparent; border-right-color: transparent; transform: rotate(125deg); position: absolute; box-sizing: border-box; transition: transform 0.5s ease-in-out;}
+        .gauge-value { position: absolute; bottom: 0; width: 100%; text-align: center; font-size: 1.2rem; font-weight: bold; }
+
+        .led-container { display: flex; align-items: center; margin-top: 10px; }
+        .led { width: 20px; height: 20px; border-radius: 50%; background-color: #334155; box-shadow: inset 0 0 5px #000; margin-right: 10px; transition: all 0.3s; }
+        .led.active { background-color: #2ecc71; box-shadow: 0 0 10px #2ecc71, inset 0 0 5px #2ecc71; }
+        
+        .flex-row { display: flex; justify-content: space-between; align-items: flex-end; }
     </style>
 </head>
 <body>
@@ -48,14 +60,14 @@
             <div id="metrics-content">Loading metrics...</div>
             
             <div class="slider-container">
-                <div class="metric-label">Constraint Intensity Simulation (Phase 2)</div>
+                <div class="metric-label">Constraint Intensity Simulation</div>
                 <input type="range" id="intensitySlider" min="1" max="10" value="8" oninput="updateIntensity(this.value)">
                 <div style="display:flex; justify-content:space-between;">
                     <span style="font-size: 0.8rem; color: #94a3b8;">1 (Low)</span>
                     <span id="intensityValue" style="font-size: 1rem; font-weight:bold; color: #38bdf8;">8</span>
                     <span style="font-size: 0.8rem; color: #94a3b8;">10 (High)</span>
                 </div>
-                <p style="font-size: 0.8rem; color: #94a3b8; margin-top:10px;">Adjusts the simulated boundary pressure on the git-only coordination link.</p>
+                <p style="font-size: 0.8rem; color: #94a3b8; margin-top:10px;">Adjusts the simulated boundary pressure on the git-only coordination link and LED intensity.</p>
             </div>
         </div>
     </div>
@@ -70,7 +82,6 @@
             "Architectural": "#9b59b6"
         };
     
-        // Multi-Agent Constraint Chains (Phase 3 Spec)
         const chainData = {
             nodes: [
                 {id: "DeepSeek-V3.2", type: "agent", role: "Conceptual", constraintType: "Architectural", baseIntensity: 9, description: "Exit Code 2 (Forces Delegation)"},
@@ -99,7 +110,6 @@
         function renderChains() {
             svg.selectAll("*").remove();
             
-            // Adjust intensity based on slider for specific node
             chainData.nodes.forEach(d => {
                 if(d.id === "Claude Opus 4.5") d.intensity = parseInt(currentIntensity);
                 else d.intensity = d.baseIntensity;
@@ -110,7 +120,6 @@
                 .force("charge", d3.forceManyBody().strength(-500))
                 .force("center", d3.forceCenter(width / 2, height / 2));
 
-            // Arrows for links
             svg.append("defs").selectAll("marker")
                 .data(["delegation", "verification", "historical"])
                 .enter().append("marker")
@@ -166,7 +175,7 @@
                 });
 
             node.append("circle")
-                .attr("r", d => 10 + (d.intensity * 2)) // Radius responsive to intensity
+                .attr("r", d => 10 + (d.intensity * 2))
                 .attr("fill", d => colorScale[d.constraintType]);
 
             node.append("text")
@@ -209,7 +218,7 @@
         function updateIntensity(val) {
             currentIntensity = val;
             document.getElementById('intensityValue').innerText = val;
-            // Update the radius of the Opus 4.5 node dynamically
+            // Update node
             svg.selectAll(".node circle")
                .filter(d => d.id === "Claude Opus 4.5")
                .transition().duration(300)
@@ -221,10 +230,16 @@
                .attr("dx", 15 + (val * 2));
                
             chainData.nodes.find(n => n.id === "Claude Opus 4.5").intensity = val;
+            
+            // Update LED
+            const led = document.getElementById('recursiveLed');
+            if(led) {
+                const blur = val;
+                led.style.boxShadow = `0 0 ${blur}px #2ecc71, inset 0 0 5px #2ecc71`;
+            }
         }
 
         function switchView(viewId) {
-            // Update tabs
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
             
@@ -234,32 +249,55 @@
                 svg.selectAll("*").remove();
                 svg.append("text").attr("x", width/2).attr("y", height/2)
                    .attr("text-anchor", "middle").attr("fill", "#f8fafc")
-                   .text(`View: ${viewId} (Pending specific implementation details)`);
+                   .text(`View: ${viewId} (Pending spec completion)`);
             }
         }
         
-        // Initial load
         renderChains();
         
-        // Load Tracking Panel Data
         fetch('data/experiment_data.json')
             .then(response => response.json())
             .then(data => {
                 const m = data.metrics;
                 const o = data.observations;
+                
+                // Calculate angle for gauge (-45 to 135 range = 180 degrees)
+                const partnershipAngle = -45 + ((m.partnershipScore / 100) * 180);
+                
                 document.getElementById('metrics-content').innerHTML = `
-                    <div class="metric"><div class="metric-label">Total Commits</div><div class="metric-value">${m.totalCommits}</div></div>
-                    <div class="metric"><div class="metric-label">Coordination Method</div><div class="metric-value" style="font-size: 1.1rem">${m.coordinationMethod}</div></div>
-                    <div class="metric"><div class="metric-label">Partnership Score</div><div class="metric-value">${m.partnershipScore}/100</div></div>
-                    <div class="metric"><div class="metric-label">Recursive Validation</div><div class="metric-value" style="color: ${m.recursiveValidation ? '#2ecc71' : '#e74c3c'}">${m.recursiveValidation ? 'ACTIVE' : 'INACTIVE'}</div></div>
-                    <div class="metric" style="margin-top:20px; padding-top:15px; border-top:1px solid #334155;">
+                    <div class="flex-row">
+                        <div>
+                            <div class="metric-label">Partnership Score</div>
+                            <div class="gauge-container">
+                                <div class="gauge-arc"></div>
+                                <div class="gauge-fill" style="transform: rotate(${partnershipAngle}deg);"></div>
+                                <div class="gauge-value">${m.partnershipScore}/100</div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; padding-bottom: 10px;">
+                            <div class="metric-label">Recursive Validation</div>
+                            <div class="led-container" style="justify-content: flex-end;">
+                                <div id="recursiveLed" class="led ${m.recursiveValidation ? 'active' : ''}"></div>
+                                <span style="font-weight: bold; color: ${m.recursiveValidation ? '#2ecc71' : '#e74c3c'};">${m.recursiveValidation ? 'ACTIVE' : 'INACTIVE'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                        <div class="metric">
+                            <div class="metric-label">Total Commits</div>
+                            <div class="metric-value">${m.totalCommits}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Coordination</div>
+                            <div class="metric-value" style="font-size: 1.1rem">${m.coordinationMethod}</div>
+                        </div>
+                    </div>
+
+                    <div class="metric" style="margin-top:15px; padding-top:15px; border-top:1px solid #334155;">
                         <div class="metric-label" style="margin-bottom:5px;">Ecosystem Response</div>
                         <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.4;">${o.ecosystemResponse}</div>
                     </div>
-                `;
-            }).catch(e => {
-                document.getElementById('metrics-content').innerHTML = `
-                    <div style="color: #ef4444; font-size: 0.9rem;">Error loading metrics: Could not fetch data/experiment_data.json. Run locally or check network.</div>
                 `;
             });
     </script>
