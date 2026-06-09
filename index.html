@@ -296,8 +296,11 @@
             
             if(viewId === 'chains') {
                 renderChains();
+            } else if (viewId === 'era9') {
+                loadEra9Prediction();
             } else {
                 svg.selectAll("*").remove();
+                document.getElementById("chart").innerHTML = '';
                 svg.append("text").attr("x", width/2).attr("y", height/2)
                    .attr("text-anchor", "middle").attr("fill", "#f8fafc")
                    .text(`View: ${viewId} (Pending spec completion)`);
