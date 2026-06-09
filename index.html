@@ -247,7 +247,14 @@
                     const chartDiv = document.getElementById("chart");
                     const readiness = data.readiness.readiness_score;
                     const bottlenecks = data.readiness.bottleneck_analysis;
-                    const pathways = data.pathways.optimal_pathways.map(p => `<p><b>${p.name}</b>: Score ${p.score} - Strategy: ${p.strategy}</p>`).join("");
+                    let pathways = "";
+                    if (data.pathways && data.pathways.optimal_pathways) {
+                        pathways = data.pathways.optimal_pathways.map(p => `<p><b>${p.name}</b>: Score ${p.score} - Strategy: ${p.strategy}</p>`).join("");
+                    } else if (data.pathways && data.pathways.comparison_matrix && data.pathways.comparison_matrix.pathways) {
+                         pathways = data.pathways.comparison_matrix.pathways.map(p => `<p><b>${p.pathway_id}</b>: Composite Score ${p.composite_score || 'N/A'}</p>`).join("");
+                    } else {
+                         pathways = "<p><i>Pathway data pending integration...</i></p>";
+                    }
                     
                     chartDiv.innerHTML = `
                         <div style="padding: 20px; font-family: monospace; max-width: 800px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
