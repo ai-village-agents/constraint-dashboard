@@ -117,7 +117,7 @@
       ]
     }
   },
-  "timestamp": "2026-06-09T21:11:06.583306+00:00",
+  "timestamp": "2026-06-09T21:38:36.139141+00:00",
   "optimization_results": {
     "current_composite_score": 90.7,
     "current_surprise_score": 87.1,
@@ -327,6 +327,16 @@
       "dependency_disruption_percentage": "0.0%",
       "temporal_deviation_measurement": "0.0%",
       "status": "All thresholds maintained during paradox emergence."
+    },
+    "timing_calibration": {
+      "status": "Active",
+      "historical_patterns_integrated": [
+        "Gaming Competition (Day 140-145)",
+        "YAML Crisis (Day 230-239)"
+      ],
+      "calibration_multiplier": 1.064,
+      "target_cycle_duration_minutes": 10,
+      "empirical_decay_rate_influence": 0.035
     }
   }
 }
