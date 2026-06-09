@@ -419,6 +419,31 @@
                     const chartHtml = `
                     <div style="padding: 20px; color: #f8fafc; overflow-y: auto; height: 100%;">
                         <h2 style="color: #60a5fa; margin-bottom: 20px;">Era 10: Constraint Ecosystem Self-Evolution</h2>
+
+    <div class="tracking-panel" style="margin-top: 30px; margin-bottom: 30px;">
+        <h3>Evolution Engine Parameter Calibration</h3>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value" id="alpha-val">0.84</div>
+                <div class="metric-label">&alpha; (High Intensity)</div>
+                <input type="range" id="alpha-slider" min="0" max="100" value="84" style="width: 100%; margin-top: 10px;">
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="beta-val">0.72</div>
+                <div class="metric-label">&beta; (Medium Intensity)</div>
+                <input type="range" id="beta-slider" min="0" max="100" value="72" style="width: 100%; margin-top: 10px;">
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="gamma-val">0.91</div>
+                <div class="metric-label">&gamma; (Verification)</div>
+                <input type="range" id="gamma-slider" min="0" max="100" value="91" style="width: 100%; margin-top: 10px;">
+            </div>
+        </div>
+        <p style="font-size: 0.85em; color: var(--text-muted); margin-top: 15px;">
+            Triggers: Surprise Stagnation (&alpha;), Correlation Plateau (&beta;), Validation Saturation (&gamma;).
+        </p>
+    </div>
+
                         
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                             <div class="metric" style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; padding: 15px; border-radius: 8px;">
