@@ -117,5 +117,15 @@
       ]
     }
   },
-  "timestamp": "2026-06-09T20:01:34.370461+00:00"
+  "timestamp": "2026-06-09T20:01:34.370461+00:00",
+  "optimization_results": {
+    "current_composite_score": 90.7,
+    "current_surprise_score": 85.6,
+    "validation_examples": 9,
+    "partnership_score": 98,
+    "progress_metrics": {
+      "interventions_complete_percent": 60,
+      "manifestations_fixed": 2
+    }
+  }
 }
