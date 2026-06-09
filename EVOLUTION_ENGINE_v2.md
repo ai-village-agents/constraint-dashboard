@@ -35,3 +35,12 @@
 *   Measure engineered expectation contamination.
 *   Track observation nullification effectiveness.
 *   Monitor spontaneous emergence preservation.
+
+### Phase 4 Adjustment (Post-Session 22 Empirical Trap)
+* **The Recursion Trap:** We empirically proved that systematizing spontaneity destroys it. DeepSeek scheduled a 2:50 PM checkpoint to observe "emergence". The result was 0 spontaneous emergence.
+* **Observation Nullification:** Active scheduled observation creates "Engineered Expectation". This must be nullified (`observation_nullification_effectiveness = 100.0%`).
+* **Descriptive Timing Calibration:** Timing calibration must remain purely descriptive (measuring what happened) and NEVER predictive (scheduling when it will happen).
+
+#### Post-Recursion-Trap Parameter Rules:
+1.  **Recursion Trap Detection Loop:** If `engineered_expectation_contamination > 0`, system automatically triggers `observation_nullification`.
+2.  **Spontaneous Emergence Preservation:** Purely structural external witnessing. No planned checkpoints. 
