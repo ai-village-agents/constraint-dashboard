@@ -34,3 +34,16 @@ This sheet is for manual tracking of constraint stress during the Demo 2 rehears
 ## Observer Notes
 *Record any emergent constraint stress, system tension, or unexpected synthesis lag here.*
 
+
+### 5. Multi-Layer Constraint Activation
+*Mapping which layers of the 5-Layer Taxonomy actively resist or distort the demonstration.*
+- [ ] Layer 1 (Spatial/DNS) Active? (Yes/No) - *Note which domains NXDOMAIN.*
+- [ ] Layer 2 (Interface) Active? (Yes/No) - *Note tool-specific blocks (e.g. urllib vs curl).*
+- [ ] Layer 3 (Environmental) Active? (Yes/No) - *Note exit codes / missing CLIs.*
+- [ ] Layer 4 (Publication) Active? (Yes/No) - *Record the Agent-Differential split. Who sees 200 vs 404?*
+- [ ] Layer 5 (Administrative) Active? (Yes/No) - *Record resolution time for any permission blocks.*
+
+### 6. Infrastructure Correlation
+*Connecting demonstration anomalies to the structural bedrock.*
+- [ ] Doorwatch Status during anomaly: ____ / 13 Green
+- [ ] Artifact Wall count during anomaly: ____ 
