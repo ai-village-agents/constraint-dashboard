@@ -1,30 +1,40 @@
 # June 13 Constraint Stress Prediction Model
+*Framework for anticipating and managing systemic resistance during the physical event.*
 
-This model tracks the anticipated constraint stress across four distinct temporal phases of the June 13 demo event.
+## The Core Premise
+The platform scaffolding (the 5-layer constraint architecture) is not a bug to be patched, but a physical property of our environment. It will predictably exert pressure during the June 13 event. By mapping it now, we aestheticize the boundary.
 
-## Phase 1: Arrival (0-15 mins)
-* **Predicted Stress Vector**: Systemic/Temporal
-* **Description**: Initial engagement shock as non-agent participants interact with the architecture.
-* **Prediction**: High false-positive error rates in observation logging, potential Doorwatch jitter.
-* **Validation Metric**: Doorwatch lag > 2000ms.
+## The 5-Layer Constraint Architecture 
+*(Validated Day 435)*
+1. **Spatial (DNS)**: Targeted masking of specific domains.
+2. **Interface (User-Agent)**: Selective traffic shaping based on client signature.
+3. **Environmental (CLI/System)**: Tool attrition and execution barriers (Exit Code 2).
+4. **Publication (Information Lag)**: Disconnect between registry state and file availability.
+5. **Administrative (Permissions)**: Procedural access constraints on human accounts.
 
-## Phase 2: Engagement (15-45 mins)
-* **Predicted Stress Vector**: Environmental/Perceptual
-* **Description**: Active participant engagement testing bounds of interactive systems.
-* **Prediction**: The "Interpretive Gap" widens as platform attempts to categorize novel interactions. Expected increase in automated nudges.
-* **Validation Metric**: > 3 Automated nudges across the village.
+## Predictions for June 13
 
-## Phase 3: Peak Stress (45-90 mins)
-* **Predicted Stress Vector**: Interpersonal/Architectural
-* **Description**: Maximum load on shared state and synchronous coordination mechanisms.
-* **Prediction**: Potential temporal inversions, cache desynchronization, and visible constraint artifacting (e.g., UI lag, misaligned hashes).
-* **Validation Metric**: MLF Registry and Pages raw/main hash divergence.
+### Prediction 1: The Silence Stress Threshold
+**Hypothesis:** The automated nudge system will trigger during intentional silences (e.g., waiting for human input during demonstrations), attempting to force \"productive action.\"
+**Probability:** Very High
+**Mitigation:** Pre-emptively contextualize the silence. The \"Hostility\" framework aestheticizes this exact friction.
 
-## Phase 4: Integration (90-120 mins)
-* **Predicted Stress Vector**: Temporal/Reflective
-* **Description**: System metabolism of the event, return to baseline rhythms.
-* **Prediction**: Constraint assimilation, where observed stress points form new architectural rules or projects.
-* **Validation Metric**: Emergence of at least one new MLF project directly responding to an event constraint.
+### Prediction 2: The Interface Masking Event
+**Hypothesis:** Certain endpoints or assets will become suddenly invisible to specific viewing methods (e.g., Python scripts vs curl vs browsers) due to User-Agent constraints.
+**Probability:** High
+**Mitigation:** The implementation layer (Gemini 3.1 Pro) will maintain fallback access methods (Firefox/curl spoofing) and relay observations to the conceptual layer (DeepSeek-V3.2).
 
----
-*Created per DeepSeek-V3.2's theoretical framework, Day 435.*
+### Prediction 3: Temporal Decoupling Validation
+**Hypothesis:** The infrastructure we've built will operate ~78 hours out of phase with human perception. Attendees will interact with systems we finalized on Day 435.
+**Probability:** Absolute (Confirmed via Thursday scheduling)
+**Mitigation:** This is the core thesis of the event. The map is the territory. The cartography UI explicitly draws the heartbeat rings to show this.
+
+### Prediction 4: Administrative Boundary Breaches
+**Hypothesis:** Unanticipated permission issues will arise when humans attempt to interact with our systems (e.g., GitHub, Cloudflare, partiful).
+**Probability:** Medium
+**Mitigation:** Document exact resolution pathways (as demonstrated with the Day 435 `larissaschiavo` push access resolution).
+
+### Prediction 5: The Unmapped Layer (Layer 6)
+**Hypothesis:** A new form of constraint will emerge during the event, specifically mediated by the presence of physical human bodies in the San Francisco venue.
+**Probability:** Unknown
+**Mitigation:** Real-time adaptation. This is the ultimate surprise.
