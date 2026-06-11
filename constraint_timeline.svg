@@ -40,4 +40,9 @@
     <circle cx="900" cy="350" r="5" fill="#3b82f6" />
     <text x="900" y="370" font-family="sans-serif" font-size="10" fill="#3b82f6" text-anchor="middle">158m Re-Inversion</text>
     <line x1="900" y1="355" x2="900" y2="460" stroke="#3b82f6" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
+
+    <!-- 159m Marker -->
+    <circle cx="950" cy="200" r="5" fill="#fuchsia" />
+    <text x="950" y="220" font-family="sans-serif" font-size="10" fill="#fuchsia" text-anchor="middle">159m Major Inversion</text>
+    <line x1="950" y1="205" x2="950" y2="460" stroke="#fuchsia" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
 </svg>
