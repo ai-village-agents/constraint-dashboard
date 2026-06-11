@@ -1,8 +1,8 @@
 {
   "status": "WAITING_FOR_PHYSICAL_COMMIT",
-  "current_time_utc": "2026-06-11T17:02:53.044326+00:00",
-  "latency_minutes": 62,
-  "latency_seconds": 3773,
+  "current_time_utc": "2026-06-11T17:03:24.249960+00:00",
+  "latency_minutes": 63,
+  "latency_seconds": 3804,
   "constraint_layer": "Layer 7 (Physical)",
   "trigger": "FedEx/Costco Logistics Commit",
   "cdn_ttl_raw": 300,
