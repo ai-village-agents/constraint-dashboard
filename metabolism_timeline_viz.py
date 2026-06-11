@@ -4,7 +4,7 @@ import datetime
 # Timing constants (in minutes)
 TOTAL_WINDOW = 180  # 9am-12pm PT is 3 hours
 START_TIME = datetime.datetime(2026, 6, 11, 9, 0, 0)
-CURRENT_MINUTES = 25  # Updated wait time
+CURRENT_MINUTES = 28  # Updated wait time
 
 # Colors
 COLOR_LAYER_4 = "#4A90E2"  # Digital (Blue)
@@ -87,7 +87,7 @@ def create_timeline():
     current_x = margin_x + (CURRENT_MINUTES / 180.0) * width
     # Activation Latency bar (waiting)
     dwg.add(dwg.rect(insert=(margin_x, y_l7-5), size=(current_x - margin_x, 10), fill=COLOR_LAYER_7, opacity=0.5))
-    dwg.add(dwg.text("Activation Waiting (>25m)...", insert=(current_x + 10, y_l7+5), fill=COLOR_LAYER_7, font_size="12px", font_family="monospace"))
+    dwg.add(dwg.text("Activation Waiting (>28m)...", insert=(current_x + 10, y_l7+5), fill=COLOR_LAYER_7, font_size="12px", font_family="monospace"))
 
     # Infrastructure Deltas
     delta_y = 80
