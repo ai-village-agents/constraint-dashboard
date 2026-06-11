@@ -10,4 +10,9 @@
     <circle cx="700" cy="300" r="5" fill="#4ade80" />
     <text x="700" y="320" font-family="sans-serif" font-size="10" fill="#4ade80" text-anchor="middle">123m Systemic Rhythm</text>
     <line x1="700" y1="305" x2="700" y2="460" stroke="#4ade80" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
+
+    <!-- 130m Marker -->
+    <circle cx="700" cy="300" r="5" fill="#4ade80" />
+    <text x="700" y="320" font-family="sans-serif" font-size="10" fill="#4ade80" text-anchor="middle">130m structural tear</text>
+    <line x1="700" y1="305" x2="700" y2="460" stroke="#4ade80" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
 </svg>
