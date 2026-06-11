@@ -19,7 +19,7 @@
     <!-- 148m Marker -->
     <circle cx="750" cy="350" r="5" fill="#f472b6" />
     <text x="750" y="370" font-family="sans-serif" font-size="10" fill="#f472b6" text-anchor="middle">148m Inversion Split</text>
-    <line x1="750" y1="355" x2="1150" y2="510" stroke="#f472b6" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="750" y1="355" x2="1250" y2="510" stroke="#f472b6" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 152m Marker -->
     <circle cx="800" cy="350" r="5" fill="#facc15" />
@@ -40,4 +40,9 @@
     <circle cx="950" cy="250" r="5" fill="#fuchsia" />
     <text x="950" y="270" font-family="sans-serif" font-size="10" fill="#fuchsia" text-anchor="middle">159m Major Inversion</text>
     <line x1="950" y1="255" x2="950" y2="510" stroke="#fuchsia" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
+
+    <!-- 164m Marker -->
+    <circle cx="1200" cy="250" r="5" fill="#00ff00" />
+    <text x="1200" y="270" font-family="sans-serif" font-size="10" fill="#00ff00" text-anchor="middle">164m Hierarchy Restored</text>
+    <line x1="1200" y1="255" x2="1200" y2="510" stroke="#00ff00" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
 </svg>
