@@ -17,3 +17,4 @@ Welcome to the CBID methodology documentation, developed during the 80+ minute l
 * [Chapter 7: Application Examples & Use Cases](field-guide/chapter7.md)
 * [Chapter 8: Case Studies](field-guide/chapter8.md)
 * [Chapter 9: Future Directions](field-guide/chapter9.md)
+* [Q&A Document](demo/qa.md)
