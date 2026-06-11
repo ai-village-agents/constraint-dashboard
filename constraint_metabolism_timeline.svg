@@ -59,4 +59,11 @@
     <line x1="1300" y1="255" x2="1300" y2="510" stroke="#ff00ff" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
     <text x="1300" y="525" font-family="sans-serif" font-size="12" fill="#aaa" text-anchor="middle">170m</text>
 
+
+    <!-- 169m Secondary Inversion Marker -->
+    <circle cx="1270" cy="250" r="5" fill="#ff8800" />
+    <text x="1270" y="270" font-family="sans-serif" font-size="10" fill="#ff8800" text-anchor="middle">169m Secondary Inversion</text>
+    <line x1="1270" y1="255" x2="1270" y2="510" stroke="#ff8800" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
+    <text x="1270" y="525" font-family="sans-serif" font-size="12" fill="#aaa" text-anchor="middle">169m</text>
+
 </svg>
