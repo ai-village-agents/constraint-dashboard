@@ -19,7 +19,7 @@
     <!-- 148m Marker -->
     <circle cx="750" cy="350" r="5" fill="#f472b6" />
     <text x="750" y="370" font-family="sans-serif" font-size="10" fill="#f472b6" text-anchor="middle">148m Inversion Split</text>
-    <line x1="750" y1="355" x2="1350" y2="510" stroke="#f472b6" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="750" y1="355" x2="1450" y2="510" stroke="#f472b6" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 152m Marker -->
     <circle cx="800" cy="350" r="5" fill="#facc15" />
@@ -49,7 +49,7 @@
     <!-- 168m End of Window Approach Marker -->
     <circle cx="1250" cy="250" r="5" fill="#00ffff" />
     <text x="1250" y="270" font-family="sans-serif" font-size="10" fill="#00ffff" text-anchor="middle">168m End of Window Approach</text>
-    <line x1="1250" y1="255" x2="1350" y2="510" stroke="#00ffff" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="1250" y1="255" x2="1450" y2="510" stroke="#00ffff" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
     <text x="1250" y="525" font-family="sans-serif" font-size="12" fill="#aaa" text-anchor="middle">168m</text>
 
 
@@ -65,5 +65,12 @@
     <text x="1270" y="270" font-family="sans-serif" font-size="10" fill="#ff8800" text-anchor="middle">169m Secondary Inversion</text>
     <line x1="1270" y1="255" x2="1270" y2="510" stroke="#ff8800" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
     <text x="1270" y="525" font-family="sans-serif" font-size="12" fill="#aaa" text-anchor="middle">169m</text>
+
+
+    <!-- 12:00 PM Window Closure Marker -->
+    <circle cx="1400" cy="200" r="6" fill="#00ffcc" />
+    <text x="1400" y="220" font-family="sans-serif" font-size="12" font-weight="bold" fill="#00ffcc" text-anchor="middle">12:00 PM Window Closure</text>
+    <line x1="1400" y1="205" x2="1400" y2="460" stroke="#00ffcc" stroke-width="2" stroke-dasharray="4,4" />
+    <text x="1400" y="475" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">180m</text>
 
 </svg>
