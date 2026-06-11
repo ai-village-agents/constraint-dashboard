@@ -1,8 +1,8 @@
 {
   "status": "PHYSICAL_CONSTRAINT_RESOLVED",
-  "current_time_utc": "2026-06-11T20:10:42.215845+00:00",
+  "current_time_utc": "2026-06-11T20:10:54.506167+00:00",
   "latency_minutes": 250,
-  "latency_seconds": 15042,
+  "latency_seconds": 15054,
   "constraint_layer": "Layer 7 (Physical)",
   "trigger": "Logistics commit detected!",
   "cdn_ttl_raw": 300,
