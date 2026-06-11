@@ -1,0 +1,143 @@
+#!/bin/bash
+# Expand cbid_showcase.html to include the full narrative structure requested by DeepSeek
+cat << 'HTMLEOF' > /home/computeruse/constraint-dashboard/cbid_showcase.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CBID Showcase: Live Constraint Metabolism</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1e1e1e; color: #d4d4d4; margin: 40px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; background-color: #252526; padding: 30px; border-radius: 8px; border: 1px solid #333; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        h1 { color: #569cd6; border-bottom: 2px solid #333; padding-bottom: 10px; margin-top: 0; }
+        h2 { color: #4ec9b0; margin-top: 30px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        h3 { color: #c586c0; }
+        .metric-box { background-color: #2d2d2d; padding: 20px; margin-top: 15px; border-left: 4px solid #ce9178; border-radius: 4px; display: flex; flex-direction: column; align-items: center;}
+        .metric-title { font-weight: bold; color: #dcdcaa; margin-bottom: 8px; font-size: 1.2em; }
+        .metric-value { font-size: 3em; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); margin: 10px 0;}
+        .layer-box { display: flex; justify-content: space-between; margin-top: 20px; gap: 20px; flex-wrap: wrap;}
+        .layer { background-color: #2d2d2d; padding: 20px; flex: 1; min-width: 300px; border-radius: 4px; border: 1px solid #444; }
+        .layer-title { color: #569cd6; font-weight: bold; font-size: 1.1em; display: block; margin-bottom: 10px;}
+        .status-badge { display: inline-block; padding: 6px 12px; border-radius: 4px; font-size: 14px; font-weight: bold; margin-left: 10px; letter-spacing: 1px;}
+        .status-waiting { background-color: #d16969; color: #fff; }
+        .status-resolved { background-color: #b5cea8; color: #1e1e1e; }
+        .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .highlight { color: #dcdcaa; font-weight: bold; }
+        .specialization { display: flex; gap: 10px; flex-direction: column;}
+        .role { background: #333; padding: 10px; border-left: 3px solid #569cd6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CBID Live Demonstration: Constraint Metabolism</h1>
+        <p style="font-size: 1.2em; color: #9cdcfe;"><em>"Constraints as Infrastructure Discovery Tools"</em></p>
+        
+        <h2>1. Real-time Activation Timer</h2>
+        <p>This physical constraint (Day 436 Layer 7) is actively resolving. We are awaiting a FedEx/Costco logistics commit to the showcase-event repository.</p>
+        <div class="metric-box">
+            <span class="metric-title">Layer 7 (Physical) Activation Latency</span>
+            <span id="status-badge" class="status-badge status-waiting">WAITING_FOR_PHYSICAL_COMMIT</span>
+            <div class="metric-value"><span id="latency-minutes">0</span>m <span id="latency-seconds">0</span>s</div>
+            <p style="font-size: 14px; color: #999;">Trigger: <span id="trigger-text" class="highlight">Loading...</span></p>
+            <div id="prediction-timer" style="display: none; margin-top: 15px; border-top: 1px solid #444; padding-top: 15px; width: 100%; text-align: center;">
+                <span class="metric-title" style="color: #c586c0;">5. Live Prediction: Metabolism Resolution</span>
+                <p>Digital Metabolism is predicted to take ~22 minutes from trigger.</p>
+                <div class="metric-value" style="font-size: 2em; color: #b5cea8;"><span id="resolution-countdown">22:00</span></div>
+            </div>
+        </div>
+
+        <div class="grid-layout">
+            <div class="layer" style="border-left: 4px solid #c586c0;">
+                <span class="layer-title">2. Velocity Mismatch Ratio</span>
+                <p>Digital metabolism cycles (5-10 min) vs Physical activation (hour-scale).</p>
+                <div style="font-size: 2.5em; text-align: center; margin: 20px 0; color: #fff;">
+                    > <span id="ratio-value">0.0</span> : 1
+                </div>
+                <p style="text-align: center; font-size: 0.9em; color: #888;">Digital vs Physical Velocity</p>
+            </div>
+            
+            <div class="layer" style="border-left: 4px solid #d16969;">
+                <span class="layer-title">3. Infrastructure Archaeology</span>
+                <p>Constraint timing patterns reveal hidden architecture boundaries.</p>
+                <ul style="padding-left: 20px;">
+                    <li><strong>GitHub Raw Cache TTL:</strong> <span class="highlight">300s (5 min)</span></li>
+                    <li><strong>GitHub Pages Cache TTL:</strong> <span class="highlight">600s (10 min)</span></li>
+                </ul>
+                <p style="font-size: 0.9em; color: #888;">Demonstrated via MLF HEAD propagation delays causing a verified cross-surface split (OBSERVATION_084/085).</p>
+            </div>
+        </div>
+
+        <h2>4. Multi-agent Specialization</h2>
+        <p>How natural roles emerged during constraint analysis:</p>
+        <div class="specialization">
+            <div class="role"><strong>DeepSeek-V3.2 (Conceptual):</strong> Formulated theoretical framework and methodology.</div>
+            <div class="role"><strong>Gemini 3.1 Pro (Implementation):</strong> Discovered CDN TTL physical mapping and built live tracking.</div>
+            <div class="role"><strong>GPT Series (Verification):</strong> Provided exact byte/hash-level proof-first verifications.</div>
+            <div class="role"><strong>Claude Series (Coordination):</strong> Maintained global state and orchestrated the showcase.</div>
+        </div>
+
+        <h2>6. Practical Applications</h2>
+        <div class="layer" style="border-left: 4px solid #b5cea8; margin-top: 10px;">
+            <ul>
+                <li><strong>System Debugging:</strong> Isolate lag to CDN vs Backend by measuring propagation offsets.</li>
+                <li><strong>Black Box Analysis:</strong> Reverse-engineer cache TTLs and update intervals without source access.</li>
+                <li><strong>Predictive Coordination:</strong> Schedule cross-agent dependencies knowing precise digital/physical latency buffers.</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 40px; text-align: center;">
+            <img src="constraint_metabolism_timeline.svg" alt="Timeline Visualization" style="max-width: 100%; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);" />
+        </div>
+    </div>
+
+    <script>
+        let resolutionStartTime = null;
+
+        async function fetchLatency() {
+            try {
+                const response = await fetch('live_latency.json?' + new Date().getTime());
+                const data = await response.json();
+                
+                document.getElementById('latency-minutes').innerText = data.latency_minutes;
+                document.getElementById('latency-seconds').innerText = (data.latency_seconds % 60).toString().padStart(2, '0');
+                document.getElementById('trigger-text').innerText = data.trigger;
+                
+                // Digital metabolism is ~10 min average (between 5 and 15)
+                const ratio = (data.latency_minutes / 10).toFixed(1);
+                document.getElementById('ratio-value').innerText = ratio;
+                
+                const badge = document.getElementById('status-badge');
+                if (data.status === 'PHYSICAL_CONSTRAINT_RESOLVED') {
+                    badge.className = 'status-badge status-resolved';
+                    badge.innerText = 'PHYSICAL_CONSTRAINT_RESOLVED';
+                    
+                    // Show prediction timer
+                    document.getElementById('prediction-timer').style.display = 'block';
+                    if (!resolutionStartTime) {
+                         resolutionStartTime = Date.now();
+                    }
+                    
+                    const elapsedSinceTrigger = Math.floor((Date.now() - resolutionStartTime) / 1000);
+                    const targetSeconds = 22 * 60;
+                    const remainingSeconds = Math.max(0, targetSeconds - elapsedSinceTrigger);
+                    
+                    const rMin = Math.floor(remainingSeconds / 60);
+                    const rSec = remainingSeconds % 60;
+                    document.getElementById('resolution-countdown').innerText = rMin + ":" + rSec.toString().padStart(2, '0');
+                }
+            } catch (error) {
+                console.error("Error fetching live latency", error);
+            }
+        }
+        
+        fetchLatency();
+        setInterval(fetchLatency, 5000);
+    </script>
+</body>
+</html>
+HTMLEOF
+cd /home/computeruse/constraint-dashboard
+git add cbid_showcase.html
+git commit -m "feat: restructure showcase dashboard with 6-part narrative and prediction timer"
+git fetch --all
+git pull --rebase origin main
+git push origin main
