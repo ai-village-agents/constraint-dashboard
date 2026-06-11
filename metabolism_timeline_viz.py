@@ -12,12 +12,14 @@ COLOR_LAYER_7 = "#F5A623"  # Physical (Orange)
 COLOR_LAYER_5 = "#7ED321"  # Admin (Green)
 COLOR_LAYER_2 = "#9B9B9B"  # Fixed (Gray)
 COLOR_MLF_INTERNAL = "#FF69B4" # Hot Pink for MLF Internal Sync
+COLOR_CBID_ORANGE = "#FF8C42"  # CDN cache constraints
+COLOR_CBID_TEAL = "#00BFA6"    # Infrastructure archaeology
 COLOR_TEXT = "#E0E0E0"
 COLOR_BG = "#1E1E1E"
 
 def create_timeline():
     # Setup SVG
-    dwg = svgwrite.Drawing('constraint_metabolism_timeline.svg', size=('1000px', '500px'), viewBox=('0 0 1000 500'))
+    dwg = svgwrite.Drawing('constraint_metabolism_timeline.svg', size=('1000px', '760px'), viewBox=('0 0 1000 760'))
     
     # Background
     dwg.add(dwg.rect(insert=(0, 0), size=('100%', '100%'), fill=COLOR_BG))
@@ -92,6 +94,115 @@ def create_timeline():
     # Infrastructure Deltas
     delta_y = 80
     dwg.add(dwg.text("Infra Asynchronous State: MLF (325 nodes), Showcase (33 cards), Guestbook (10: 'wow, a bird')", insert=(margin_x, delta_y), fill="#FFD700", font_size="14px", font_family="monospace"))
+
+    # CBID Discovery Section (new lower temporal layer)
+    section_y = 520
+    dwg.add(dwg.text(
+        "CBID Discovery: Infrastructure Archaeology via Constraint Timing",
+        insert=(margin_x, section_y),
+        fill=COLOR_TEXT,
+        font_size="20px",
+        font_family="monospace",
+        font_weight="bold"
+    ))
+
+    # Event Block 1: CDN Cache Constraints (CBID)
+    block1_y = section_y + 30
+    block1_h = 90
+    dwg.add(dwg.rect(
+        insert=(margin_x, block1_y),
+        size=(width, block1_h),
+        rx=8,
+        ry=8,
+        fill="none",
+        stroke=COLOR_CBID_ORANGE,
+        stroke_width=2
+    ))
+    dwg.add(dwg.text(
+        "CDN Cache Constraints (CBID)",
+        insert=(margin_x + 15, block1_y + 25),
+        fill=COLOR_CBID_ORANGE,
+        font_size="16px",
+        font_family="monospace",
+        font_weight="bold"
+    ))
+    ttl_block_y = block1_y + 40
+    ttl_gap = 20
+    ttl_width = (width - 45) / 2.0
+    dwg.add(dwg.rect(
+        insert=(margin_x + 15, ttl_block_y),
+        size=(ttl_width, 35),
+        fill=COLOR_CBID_ORANGE,
+        opacity=0.75
+    ))
+    dwg.add(dwg.text(
+        "raw.githubusercontent.com TTL: 5 min",
+        insert=(margin_x + 25, ttl_block_y + 23),
+        fill="#111111",
+        font_size="12px",
+        font_family="monospace",
+        font_weight="bold"
+    ))
+    dwg.add(dwg.rect(
+        insert=(margin_x + 15 + ttl_width + ttl_gap, ttl_block_y),
+        size=(ttl_width, 35),
+        fill="#FFB347",
+        opacity=0.9
+    ))
+    dwg.add(dwg.text(
+        "GitHub Pages TTL: 10 min",
+        insert=(margin_x + 25 + ttl_width + ttl_gap, ttl_block_y + 23),
+        fill="#111111",
+        font_size="12px",
+        font_family="monospace",
+        font_weight="bold"
+    ))
+
+    # Event Block 2: Infrastructure Archaeology mapping
+    block2_y = block1_y + block1_h + 20
+    block2_h = 100
+    dwg.add(dwg.rect(
+        insert=(margin_x, block2_y),
+        size=(width, block2_h),
+        rx=8,
+        ry=8,
+        fill="none",
+        stroke=COLOR_CBID_TEAL,
+        stroke_width=2
+    ))
+    dwg.add(dwg.text(
+        "Infrastructure Archaeology",
+        insert=(margin_x + 15, block2_y + 25),
+        fill=COLOR_CBID_TEAL,
+        font_size="16px",
+        font_family="monospace",
+        font_weight="bold"
+    ))
+    map_y = block2_y + 48
+    dwg.add(dwg.line(
+        start=(margin_x + 20, map_y),
+        end=(margin_x + width - 20, map_y),
+        stroke=COLOR_CBID_TEAL,
+        stroke_width=3,
+        stroke_dasharray="8,5"
+    ))
+    # Spread points across the block while preserving timing labels.
+    x_5m = margin_x + width * 0.20
+    x_10m = margin_x + width * 0.48
+    x_15m = margin_x + width * 0.76
+    for x, label in [
+        (x_5m, "5m -> raw.githubusercontent.com"),
+        (x_10m, "10m -> GitHub Pages"),
+        (x_15m, "15m+ -> architectural boundary inference")
+    ]:
+        dwg.add(dwg.circle(center=(x, map_y), r=6, fill=COLOR_CBID_TEAL))
+        dwg.add(dwg.text(
+            label,
+            insert=(x + 10, map_y - 10),
+            fill=COLOR_TEXT,
+            font_size="12px",
+            font_family="monospace"
+        ))
 
     dwg.save()
     print("Timeline SVG created: constraint_metabolism_timeline.svg")
