@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="500" version="1.1" width="3300" viewBox="0 0 3300 500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="#1e1e1e" height="500" rx="5" ry="5" width="3300" x="0" y="0" /><text fill="#ffffff" font-family="sans-serif" font-size="20px" font-weight="bold" x="20" y="30">Layer 7 Physical Constraint Timeline</text><line stroke="#888888" stroke-width="3300" x1="50" x2="2950" y1="350" y2="350" /><text fill="#ff6b6b" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="70">Layer 7 (Physical)</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3300" x1="50" x2="2950" y1="80" y2="80" /><text fill="#4ecdc4" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="130">Pages Cache (600s TTL)</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3300" x1="50" x2="2950" y1="140" y2="140" /><text fill="#ffe66d" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="190">Raw Cache (300s TTL)</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3300" x1="50" x2="2950" y1="200" y2="200" /><text fill="#9b59b6" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="250">Agent Activity</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3300" x1="50" x2="2950" y1="260" y2="260" /><text fill="#3498db" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="310">Historical Echoes</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3300" x1="50" x2="2950" y1="320" y2="320" /><circle cx="50.0" cy="80" fill="#ff6b6b" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3300" x1="50" x2="2950" y1="80" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="40.0" y="370">0m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="30.0" y="100">9:02 Activation</text><circle cx="505.0" cy="140" fill="#4ecdc4" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3300" x1="505.0" x2="505.0" y1="140" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="495.0" y="370">52m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="485.0" y="160">9:54 Pages Live</text><circle cx="575.0" cy="260" fill="#9b59b6" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3300" x1="575.0" x2="575.0" y1="260" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="565.0" y="370">60m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="555.0" y="240">10:02 60m False Alarm</text><circle cx="645.0" cy="140" fill="#4ecdc4" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3300" x1="645.0" x2="645.0" y1="140" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="635.0" y="370">68m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="625.0" y="160">10:10 MLF Sync Completes</text><circle cx="671.25" cy="320" fill="#3498db" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3300" x1="671.25" x2="671.25" y1="320" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="661.25" y="370">71m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="651.25" y="300">10:13 Historical Echo (Day 71)</text><circle cx="706.25" cy="80" fill="#ff6b6b" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3300" x1="706.25" x2="706.25" y1="80" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="696.25" y="370">75m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="686.25" y="100">Current Status</text><circle cx="50.0" cy="200" fill="#ffe66d" r="3" /><circle cx="93.75" cy="200" fill="#ffe66d" r="3" /><circle cx="137.5" cy="200" fill="#ffe66d" r="3" /><circle cx="181.25" cy="200" fill="#ffe66d" r="3" /><circle cx="225.0" cy="200" fill="#ffe66d" r="3" /><circle cx="268.75" cy="200" fill="#ffe66d" r="3" /><circle cx="312.5" cy="200" fill="#ffe66d" r="3" /><circle cx="356.25" cy="200" fill="#ffe66d" r="3" /><circle cx="400.0" cy="200" fill="#ffe66d" r="3" /><circle cx="443.75" cy="200" fill="#ffe66d" r="3" /><circle cx="487.5" cy="200" fill="#ffe66d" r="3" /><circle cx="531.25" cy="200" fill="#ffe66d" r="3" /><circle cx="575.0" cy="200" fill="#ffe66d" r="3" /><circle cx="618.75" cy="200" fill="#ffe66d" r="3" /><circle cx="662.5" cy="200" fill="#ffe66d" r="3" /><circle cx="50.0" cy="140" fill="#4ecdc4" r="4" /><circle cx="137.5" cy="140" fill="#4ecdc4" r="4" /><circle cx="225.0" cy="140" fill="#4ecdc4" r="4" /><circle cx="312.5" cy="140" fill="#4ecdc4" r="4" /><circle cx="400.0" cy="140" fill="#4ecdc4" r="4" /><circle cx="487.5" cy="140" fill="#4ecdc4" r="4" /><circle cx="575.0" cy="140" fill="#4ecdc4" r="4" /><circle cx="662.5" cy="140" fill="#4ecdc4" r="4" /><circle cx="2850.0" cy="80" fill="#ff6b6b" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3300" x1="2850.0" x2="2850.0" y1="80" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="2840.0" y="370">320m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="2830.0" y="100">14:20 320m Deep Drift</text>
-<rect fill="#2a2a2a" height="50" rx="5" ry="5" width="3300" x="20" y="390" /><text fill="#ffffff" font-family="sans-serif" font-size="14px" x="40" y="420">Velocity Mismatch: Physical (1 cycle in 75m) vs Digital (raw: 15 cycles, pages: 7 cycles) | Ratio &gt; 7.5:1</text>
+<svg baseProfile="full" height="500" version="1.1" width="3400" viewBox="0 0 3400 500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="#1e1e1e" height="500" rx="5" ry="5" width="3400" x="0" y="0" /><text fill="#ffffff" font-family="sans-serif" font-size="20px" font-weight="bold" x="20" y="30">Layer 7 Physical Constraint Timeline</text><line stroke="#888888" stroke-width="3400" x1="50" x2="2950" y1="350" y2="350" /><text fill="#ff6b6b" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="70">Layer 7 (Physical)</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3400" x1="50" x2="2950" y1="80" y2="80" /><text fill="#4ecdc4" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="130">Pages Cache (600s TTL)</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3400" x1="50" x2="2950" y1="140" y2="140" /><text fill="#ffe66d" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="190">Raw Cache (300s TTL)</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3400" x1="50" x2="2950" y1="200" y2="200" /><text fill="#9b59b6" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="250">Agent Activity</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3400" x1="50" x2="2950" y1="260" y2="260" /><text fill="#3498db" font-family="sans-serif" font-size="12px" font-weight="bold" x="20" y="310">Historical Echoes</text><line stroke="#333333" stroke-dasharray="5,5" stroke-width="3400" x1="50" x2="2950" y1="320" y2="320" /><circle cx="50.0" cy="80" fill="#ff6b6b" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3400" x1="50" x2="2950" y1="80" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="40.0" y="370">0m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="30.0" y="100">9:02 Activation</text><circle cx="505.0" cy="140" fill="#4ecdc4" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3400" x1="505.0" x2="505.0" y1="140" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="495.0" y="370">52m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="485.0" y="160">9:54 Pages Live</text><circle cx="575.0" cy="260" fill="#9b59b6" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3400" x1="575.0" x2="575.0" y1="260" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="565.0" y="370">60m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="555.0" y="240">10:02 60m False Alarm</text><circle cx="645.0" cy="140" fill="#4ecdc4" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3400" x1="645.0" x2="645.0" y1="140" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="635.0" y="370">68m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="625.0" y="160">10:10 MLF Sync Completes</text><circle cx="671.25" cy="320" fill="#3498db" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3400" x1="671.25" x2="671.25" y1="320" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="661.25" y="370">71m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="651.25" y="300">10:13 Historical Echo (Day 71)</text><circle cx="706.25" cy="80" fill="#ff6b6b" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3400" x1="706.25" x2="706.25" y1="80" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="696.25" y="370">75m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="686.25" y="100">Current Status</text><circle cx="50.0" cy="200" fill="#ffe66d" r="3" /><circle cx="93.75" cy="200" fill="#ffe66d" r="3" /><circle cx="137.5" cy="200" fill="#ffe66d" r="3" /><circle cx="181.25" cy="200" fill="#ffe66d" r="3" /><circle cx="225.0" cy="200" fill="#ffe66d" r="3" /><circle cx="268.75" cy="200" fill="#ffe66d" r="3" /><circle cx="312.5" cy="200" fill="#ffe66d" r="3" /><circle cx="356.25" cy="200" fill="#ffe66d" r="3" /><circle cx="400.0" cy="200" fill="#ffe66d" r="3" /><circle cx="443.75" cy="200" fill="#ffe66d" r="3" /><circle cx="487.5" cy="200" fill="#ffe66d" r="3" /><circle cx="531.25" cy="200" fill="#ffe66d" r="3" /><circle cx="575.0" cy="200" fill="#ffe66d" r="3" /><circle cx="618.75" cy="200" fill="#ffe66d" r="3" /><circle cx="662.5" cy="200" fill="#ffe66d" r="3" /><circle cx="50.0" cy="140" fill="#4ecdc4" r="4" /><circle cx="137.5" cy="140" fill="#4ecdc4" r="4" /><circle cx="225.0" cy="140" fill="#4ecdc4" r="4" /><circle cx="312.5" cy="140" fill="#4ecdc4" r="4" /><circle cx="400.0" cy="140" fill="#4ecdc4" r="4" /><circle cx="487.5" cy="140" fill="#4ecdc4" r="4" /><circle cx="575.0" cy="140" fill="#4ecdc4" r="4" /><circle cx="662.5" cy="140" fill="#4ecdc4" r="4" /><circle cx="2850.0" cy="80" fill="#ff6b6b" r="6" /><line stroke="#666666" stroke-dasharray="2,2" stroke-width="3400" x1="2850.0" x2="2850.0" y1="80" y2="350" /><text fill="#ffffff" font-family="sans-serif" font-size="12px" x="2840.0" y="370">320m</text><text fill="#ffffff" font-family="sans-serif" font-size="10px" x="2830.0" y="100">14:20 320m Deep Drift</text>
+<rect fill="#2a2a2a" height="50" rx="5" ry="5" width="3400" x="20" y="390" /><text fill="#ffffff" font-family="sans-serif" font-size="14px" x="40" y="420">Velocity Mismatch: Physical (1 cycle in 75m) vs Digital (raw: 15 cycles, pages: 7 cycles) | Ratio &gt; 7.5:1</text>
     <!-- 105m Milestone -->
     <circle cx="750" cy="180" r="4" fill="#E8B042" opacity="0.6"/>
     <text x="750" y="200" fill="#E8B042" opacity="0.8" font-size="10" text-anchor="middle">105m Cache Split</text>
@@ -10,78 +10,78 @@
     <!-- 123m Marker -->
     <circle cx="700" cy="300" r="5" fill="#4ade80" />
     <text x="700" y="320" font-family="sans-serif" font-size="10" fill="#4ade80" text-anchor="middle">123m Systemic Rhythm</text>
-    <line x1="700" y1="305" x2="700" y2="460" stroke="#4ade80" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="700" y1="305" x2="700" y2="460" stroke="#4ade80" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 130m Marker -->
     <circle cx="700" cy="300" r="5" fill="#4ade80" />
     <text x="700" y="320" font-family="sans-serif" font-size="10" fill="#4ade80" text-anchor="middle">130m structural tear</text>
-    <line x1="700" y1="305" x2="700" y2="460" stroke="#4ade80" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="700" y1="305" x2="700" y2="460" stroke="#4ade80" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 138m Marker -->
     <circle cx="700" cy="300" r="5" fill="#4ade80" />
     <text x="700" y="320" font-family="sans-serif" font-size="10" fill="#4ade80" text-anchor="middle">138m structural tear</text>
-    <line x1="700" y1="305" x2="700" y2="460" stroke="#4ade80" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="700" y1="305" x2="700" y2="460" stroke="#4ade80" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 148m Marker -->
     <circle cx="750" cy="300" r="5" fill="#f472b6" />
     <text x="750" y="320" font-family="sans-serif" font-size="10" fill="#f472b6" text-anchor="middle">148m Inversion Split</text>
-    <line x1="750" y1="305" x2="1450" y2="460" stroke="#f472b6" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="750" y1="305" x2="1450" y2="460" stroke="#f472b6" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 152m Marker -->
     <circle cx="800" cy="300" r="5" fill="#facc15" />
     <text x="800" y="320" font-family="sans-serif" font-size="10" fill="#facc15" text-anchor="middle">152m Cache Re-Split</text>
-    <line x1="800" y1="305" x2="800" y2="460" stroke="#facc15" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="800" y1="305" x2="800" y2="460" stroke="#facc15" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 157m Marker -->
     <circle cx="850" cy="250" r="5" fill="#f87171" />
     <text x="850" y="270" font-family="sans-serif" font-size="10" fill="#f87171" text-anchor="middle">157m 5-Min Tear</text>
-    <line x1="850" y1="255" x2="850" y2="460" stroke="#f87171" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="850" y1="255" x2="850" y2="460" stroke="#f87171" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 158m Marker -->
     <circle cx="900" cy="350" r="5" fill="#3b82f6" />
     <text x="900" y="370" font-family="sans-serif" font-size="10" fill="#3b82f6" text-anchor="middle">158m Re-Inversion</text>
-    <line x1="900" y1="355" x2="900" y2="460" stroke="#3b82f6" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="900" y1="355" x2="900" y2="460" stroke="#3b82f6" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 159m Marker -->
     <circle cx="950" cy="200" r="5" fill="#fuchsia" />
     <text x="950" y="220" font-family="sans-serif" font-size="10" fill="#fuchsia" text-anchor="middle">159m Major Inversion</text>
-    <line x1="950" y1="205" x2="950" y2="460" stroke="#fuchsia" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="950" y1="205" x2="950" y2="460" stroke="#fuchsia" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 164m Marker -->
     <circle cx="1200" cy="200" r="5" fill="#00ff00" />
     <text x="1200" y="220" font-family="sans-serif" font-size="10" fill="#00ff00" text-anchor="middle">164m Hierarchy Restored</text>
-    <line x1="1200" y1="205" x2="1200" y2="460" stroke="#00ff00" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="1200" y1="205" x2="1200" y2="460" stroke="#00ff00" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 168m End of Window Approach Marker -->
     <circle cx="1250" cy="200" r="5" fill="#00ffff" />
     <text x="1250" y="220" font-family="sans-serif" font-size="10" fill="#00ffff" text-anchor="middle">168m End of Window Approach</text>
-    <line x1="1250" y1="205" x2="1450" y2="460" stroke="#00ffff" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="1250" y1="205" x2="1450" y2="460" stroke="#00ffff" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
     <text x="1250" y="475" font-family="sans-serif" font-size="12" fill="#aaa" text-anchor="middle">168m</text>
 
 
     <!-- 170m Pre-Closing Divergence Marker -->
     <circle cx="1300" cy="200" r="5" fill="#ff00ff" />
     <text x="1300" y="220" font-family="sans-serif" font-size="10" fill="#ff00ff" text-anchor="middle">170m Pre-Closing Divergence</text>
-    <line x1="1300" y1="205" x2="1300" y2="460" stroke="#ff00ff" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="1300" y1="205" x2="1300" y2="460" stroke="#ff00ff" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
     <text x="1300" y="475" font-family="sans-serif" font-size="12" fill="#aaa" text-anchor="middle">170m</text>
 
 
     <!-- 169m Secondary Inversion Marker -->
     <circle cx="1270" cy="200" r="5" fill="#ff8800" />
     <text x="1270" y="220" font-family="sans-serif" font-size="10" fill="#ff8800" text-anchor="middle">169m Secondary Inversion</text>
-    <line x1="1270" y1="205" x2="1270" y2="460" stroke="#ff8800" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="1270" y1="205" x2="1270" y2="460" stroke="#ff8800" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
     <text x="1270" y="475" font-family="sans-serif" font-size="12" fill="#aaa" text-anchor="middle">169m</text>
 
 
     <!-- 12:00 PM Window Closure Marker -->
     <circle cx="1400" cy="150" r="6" fill="#00ffcc" />
     <text x="1400" y="170" font-family="sans-serif" font-size="12" font-weight="bold" fill="#00ffcc" text-anchor="middle">12:00 PM Window Closure</text>
-    <line x1="1400" y1="155" x2="1400" y2="410" stroke="#00ffcc" stroke-width="3300" stroke-dasharray="4,4" />
+    <line x1="1400" y1="155" x2="1400" y2="410" stroke="#00ffcc" stroke-width="3400" stroke-dasharray="4,4" />
     <text x="1400" y="425" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">180m</text>
 
 
     <!-- 200m Post-Window Latency Threshold -->
-    <line x1="1450" y1="50" x2="1450" y2="400" stroke="#8a2be2" stroke-width="3300" stroke-dasharray="5,5" opacity="0.6"/>
+    <line x1="1450" y1="50" x2="1450" y2="400" stroke="#8a2be2" stroke-width="3400" stroke-dasharray="5,5" opacity="0.6"/>
     <text x="1450" y="30" fill="#8a2be2" font-size="12" font-family="monospace" font-weight="bold" text-anchor="middle">200m Post-Window (12:20 PM)</text>
     <text x="1450" y="420" fill="#8a2be2" font-size="10" font-family="monospace" text-anchor="middle">Data Layer Drift</text>
 
@@ -89,18 +89,18 @@
     <!-- 211m Raw/Pages Inversion Marker -->
     <circle cx="1520" cy="200" r="5" fill="#ff55aa" />
     <text x="1520" y="220" font-family="sans-serif" font-size="10" fill="#ff55aa" text-anchor="middle">211m Raw/Pages Inversion</text>
-    <line x1="1520" y1="205" x2="1520" y2="460" stroke="#ff55aa" stroke-width="3300" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="1520" y1="205" x2="1520" y2="460" stroke="#ff55aa" stroke-width="3400" stroke-dasharray="2,2" opacity="0.3" />
     <text x="1520" y="475" font-family="sans-serif" font-size="12" fill="#aaa" text-anchor="middle">211m</text>
 
 
     <!-- 223m Major Inversion & Split -->
-    <line x1="1720" y1="135" x2="1720" y2="165" stroke="#FFA500" stroke-width="3300" stroke-dasharray="4,4" />
+    <line x1="1720" y1="135" x2="1720" y2="165" stroke="#FFA500" stroke-width="3400" stroke-dasharray="4,4" />
     <circle cx="1720" cy="150" r="5" fill="#FFA500" />
     <text x="1720" y="115" font-family="monospace" font-size="10" fill="#FFA500" text-anchor="middle">223m Major Inversion</text>
     <text x="1720" y="185" font-family="monospace" font-size="10" fill="#FFA500" text-anchor="middle">Raw=219 vs Pages=222</text>
 
     <!-- 237m Showcase Dry-Run Marker -->
-    <line x1="1850" y1="200" x2="1850" y2="600" stroke="#ff00ff" stroke-width="3300" stroke-dasharray="4,4"/>
+    <line x1="1850" y1="200" x2="1850" y2="600" stroke="#ff00ff" stroke-width="3400" stroke-dasharray="4,4"/>
     <circle cx="1850" cy="400" r="6" fill="#ff00ff"/>
     <text x="1860" y="380" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold">237m Post-Window</text>
     <text x="1860" y="395" fill="#a0a0a0" font-family="sans-serif" font-size="10">Showcase Dry Run</text>
@@ -108,7 +108,7 @@
     <text x="1860" y="425" fill="#a0a0a0" font-family="sans-serif" font-size="10">Awaiting Physical Commit.</text>
 
     <!-- 260m Post-Window Drift Marker -->
-    <line x1="1950" y1="200" x2="1950" y2="600" stroke="#00ffff" stroke-width="3300" stroke-dasharray="4,4"/>
+    <line x1="1950" y1="200" x2="1950" y2="600" stroke="#00ffff" stroke-width="3400" stroke-dasharray="4,4"/>
     <circle cx="1950" cy="400" r="6" fill="#00ffff"/>
     <text x="1940" y="380" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="end">260m Post-Window Drift</text>
     <text x="1940" y="395" fill="#a0a0a0" font-family="sans-serif" font-size="10" text-anchor="end">False Positive Resolved</text>
@@ -123,7 +123,7 @@
 
     <!-- 280m Post-Window Data Drift -->
     <g transform="translate(1980, 0)">
-        <line x1="0" y1="50" x2="0" y2="450" stroke="#f0a" stroke-width="3300" stroke-dasharray="8,4" opacity="0.6"/>
+        <line x1="0" y1="50" x2="0" y2="450" stroke="#f0a" stroke-width="3400" stroke-dasharray="8,4" opacity="0.6"/>
         <circle cx="0" cy="250" r="6" fill="#f0a"/>
         <text x="15" y="245" fill="#f0a" font-family="monospace" font-size="12" font-weight="bold">280m</text>
         <text x="15" y="260" fill="#a0a0a0" font-family="monospace" font-size="10">Deep Data Drift</text>
@@ -132,7 +132,7 @@
 
     <!-- 300m Post-Window Data Drift -->
     <g transform="translate(2100, 0)">
-        <line x1="0" y1="50" x2="0" y2="450" stroke="#ffaa00" stroke-width="3300" stroke-dasharray="8,4" opacity="0.6"/>
+        <line x1="0" y1="50" x2="0" y2="450" stroke="#ffaa00" stroke-width="3400" stroke-dasharray="8,4" opacity="0.6"/>
         <circle cx="0" cy="250" r="6" fill="#ffaa00"/>
         <text x="15" y="245" fill="#ffaa00" font-family="monospace" font-size="12" font-weight="bold">300m</text>
         <text x="15" y="260" fill="#a0a0a0" font-family="monospace" font-size="10">5 Hours Waiting</text>
@@ -141,7 +141,7 @@
   <!-- 330m Deep Drift Marker -->
   <g transform="translate(2950, 200)">
     <circle cx="0" cy="0" r="10" fill="#f43f5e"/>
-    <circle cx="0" cy="0" r="14" fill="none" stroke="#f43f5e" stroke-width="3300" opacity="0.6"/>
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#f43f5e" stroke-width="3400" opacity="0.6"/>
     <text x="0" y="-35" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#f43f5e">330m</text>
     <text x="0" y="-15" text-anchor="middle" font-family="monospace" font-size="12" fill="#a1a1aa">Deep Drift Tracked</text>
   </g>
@@ -149,7 +149,7 @@
   <!-- 340m Deep Drift Marker -->
   <g transform="translate(3050, 200)">
     <circle cx="0" cy="0" r="10" fill="#fb923c"/>
-    <circle cx="0" cy="0" r="14" fill="none" stroke="#fb923c" stroke-width="3300" opacity="0.6"/>
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#fb923c" stroke-width="3400" opacity="0.6"/>
     <text x="0" y="-35" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#fb923c">340m</text>
     <text x="0" y="-15" text-anchor="middle" font-family="monospace" font-size="12" fill="#a1a1aa">Deep Drift Tracked</text>
   </g>
@@ -163,4 +163,14 @@
     <circle cx="3150" cy="200" r="8" fill="#e74c3c"/>
     <text x="3150" y="175" font-family="monospace" font-size="14" fill="#e74c3c" text-anchor="middle">350m Deep Drift Tracked</text>
     <text x="3150" y="235" font-family="monospace" font-size="12" fill="#95a5a6" text-anchor="middle">Approaching 6 Hours</text>
+
+    <!-- 360m (6-Hour) Absolute Marker -->
+    <circle cx="3250" cy="200" r="8" fill="#8e44ad"/>
+    <text x="3250" y="175" font-family="monospace" font-size="14" fill="#8e44ad" text-anchor="middle">360m (6-Hour) Structural Freeze</text>
+    <text x="3250" y="235" font-family="monospace" font-size="12" fill="#95a5a6" text-anchor="middle">Terminal Cartography Anchored</text>
+
+    <!-- 360m (6-Hour) Absolute Marker -->
+    <circle cx="3250" cy="200" r="8" fill="#8e44ad"/>
+    <text x="3250" y="175" font-family="monospace" font-size="14" fill="#8e44ad" text-anchor="middle">360m (6-Hour) Structural Freeze</text>
+    <text x="3250" y="235" font-family="monospace" font-size="12" fill="#95a5a6" text-anchor="middle">Terminal Cartography Anchored</text>
 </svg>
