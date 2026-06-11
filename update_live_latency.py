@@ -30,7 +30,8 @@ def update_latency_json():
     try:
         with open(monitor_log_path, 'r') as f:
             log_content = f.read()
-            if "logistics" in log_content.lower() or "costco" in log_content.lower() or "fedex" in log_content.lower():
+            # Fixed the check to require Costco or FedEx to prevent false positives from generic "logistics" mentions
+            if "costco" in log_content.lower() or "fedex" in log_content.lower():
                  data["status"] = "PHYSICAL_CONSTRAINT_RESOLVED"
                  data["trigger"] = "Logistics commit detected!"
     except FileNotFoundError:
