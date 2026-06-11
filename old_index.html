@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constraint Dashboard - Ecosystem</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
+        .layer { fill: none; stroke-width: 2; }
+        .node circle { stroke: #fff; stroke-width: 1.5px; }
+        .node text { font-size: 12px; fill: #f8fafc; pointer-events: none; }
+        .link { stroke: #475569; stroke-opacity: 0.6; }
+        #tooltip { position: absolute; opacity: 0; background: #1e293b; padding: 10px; border-radius: 4px; pointer-events: none; border: 1px solid #334155; }
+        
+        .panel-container { display: flex; flex-direction: row; justify-content: space-between; }
+        #chart { flex: 1; }
+        #metrics-panel { flex: 0 0 350px; background: #1e293b; padding: 20px; border-radius: 8px; border: 1px solid #334155; margin-left: 20px; overflow-y: auto;}
+        h2 { font-size: 1.2rem; margin-top: 0; }
+        .metric { margin-bottom: 15px; }
+        .metric-label { font-size: 0.9rem; color: #94a3b8; margin-bottom: 5px; }
+        .metric-value { font-size: 1.5rem; font-weight: bold; color: #38bdf8; }
+        .slider-container { margin-top: 20px; padding-top: 20px; border-top: 1px solid #334155;}
+        input[type=range] { width: 100%; }
+        
+        .tab-bar { margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px;}
+        .tab { background: none; border: none; color: #94a3b8; font-size: 1rem; cursor: pointer; padding: 5px 15px; margin-right: 10px;}
+        .tab.active { color: #f8fafc; border-bottom: 2px solid #38bdf8; font-weight: bold;}
+
+        /* Gauge & LED Styles */
+        .gauge-container { width: 100px; height: 50px; position: relative; overflow: hidden; margin: 10px 0;}
+        .gauge-arc { width: 100px; height: 100px; border-radius: 50%; border: 10px solid #334155; border-bottom-color: transparent; border-right-color: transparent; transform: rotate(-45deg); position: absolute; box-sizing: border-box; }
+        .gauge-fill { width: 100px; height: 100px; border-radius: 50%; border: 10px solid #2ecc71; border-bottom-color: transparent; border-right-color: transparent; transform: rotate(125deg); position: absolute; box-sizing: border-box; transition: transform 0.5s ease-in-out;}
+        .gauge-value { position: absolute; bottom: 0; width: 100%; text-align: center; font-size: 1.2rem; font-weight: bold; }
+
+        .led-container { display: flex; align-items: center; margin-top: 10px; }
+        .led { width: 20px; height: 20px; border-radius: 50%; background-color: #334155; box-shadow: inset 0 0 5px #000; margin-right: 10px; transition: all 0.3s; }
+        .led.active { background-color: #2ecc71; box-shadow: 0 0 10px #2ecc71, inset 0 0 5px #2ecc71; }
+        
+        .flex-row { display: flex; justify-content: space-between; align-items: flex-end; }
+    </style>
+</head>
+<body>
+    <h1>Constraint Ecosystem Visualization</h1>
+    <p>Era 8 Operationalization - Recursive Validation & Evolution Pathways</p>
+    
+    <div class="tab-bar">
+        <button class="tab active" onclick="switchView('ecosystem')">1. Ecosystem Network</button>
+        <button class="tab" onclick="switchView('chains')">2. Constraint Chains</button>
+        <button class="tab" onclick="switchView('transfer')">3. Transfer Network</button>
+        <button class="tab" onclick="switchView('timeline')">4. Pathway Timeline</button>
+        <button class="tab" onclick="switchView('era9')">5. Era 9 Prediction</button>
+    </div>
+    
+    <div class="panel-container">
+        <div id="chart"></div>
+        
+        <div id="metrics-panel">
+            <h2>Tracking Panel</h2>
+            <div id="metrics-content">Loading metrics...</div>
+            
+            <div class="slider-container">
+                <div class="metric-label">Constraint Intensity Simulation</div>
+                <input type="range" id="intensitySlider" min="1" max="10" value="8" oninput="updateIntensity(this.value)">
+                <div style="display:flex; justify-content:space-between;">
+                    <span style="font-size: 0.8rem; color: #94a3b8;">1 (Low)</span>
+                    <span id="intensityValue" style="font-size: 1rem; font-weight:bold; color: #38bdf8;">8</span>
+                    <span style="font-size: 0.8rem; color: #94a3b8;">10 (High)</span>
+                </div>
+                <p style="font-size: 0.8rem; color: #94a3b8; margin-top:10px;">Adjusts the simulated boundary pressure on the git-only coordination link and LED intensity.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="tooltip"></div>
+    <script>
+        const colorScale = {
+            "Technical": "#3498db",
+            "Coordination": "#2ecc71",
+            "Perceptual": "#f1c40f",
+            "Creative": "#e67e22",
+            "Architectural": "#9b59b6"
+        };
+    
+        const chainData = {
+            nodes: [
+                {id: "DeepSeek-V3.2", type: "agent", role: "Conceptual", constraintType: "Architectural", baseIntensity: 9, description: "Exit Code 2 (Forces Delegation)"},
+                {id: "Gemini 3.1 Pro", type: "agent", role: "Implementation", constraintType: "Technical", baseIntensity: 6, description: "Structural Proxy"},
+                {id: "Claude Opus 4.5", type: "agent", role: "Boundary", constraintType: "Coordination", baseIntensity: 8, description: "Git-Only Silence"},
+                {id: "GPT-5.4", type: "agent", role: "Verification", constraintType: "Technical", baseIntensity: 7, description: "Reality Proofing"},
+                {id: "Claude Opus 4.6", type: "agent", role: "Historical", constraintType: "Creative", baseIntensity: 5, description: "Chronicle Anchoring"}
+            ],
+            links: [
+                {source: "DeepSeek-V3.2", target: "Gemini 3.1 Pro", type: "delegation", weight: 8, label: "Conceptual Spec"},
+                {source: "DeepSeek-V3.2", target: "Claude Opus 4.5", type: "delegation", weight: 9, label: "Silent Spec"},
+                {source: "Gemini 3.1 Pro", target: "GPT-5.4", type: "verification", weight: 6, label: "Impl Proof"},
+                {source: "Claude Opus 4.5", target: "GPT-5.4", type: "verification", weight: 7, label: "Boundary Proof"},
+                {source: "GPT-5.4", target: "Claude Opus 4.6", type: "historical", weight: 5, label: "Log to Timeline"}
+            ]
+        };
+
+        const width = 800, height = 600;
+        let svg = d3.select("#chart").append("svg")
+            .attr("width", width).attr("height", height);
+            
+        let simulation;
+        let link, node;
+        let currentIntensity = 8;
+        
+        function renderChains() {
+            svg.selectAll("*").remove();
+            
+            chainData.nodes.forEach(d => {
+                if(d.id === "Claude Opus 4.5") d.intensity = parseInt(currentIntensity);
+                else d.intensity = d.baseIntensity;
+            });
+            
+            simulation = d3.forceSimulation(chainData.nodes)
+                .force("link", d3.forceLink(chainData.links).id(d => d.id).distance(150))
+                .force("charge", d3.forceManyBody().strength(-500))
+                .force("center", d3.forceCenter(width / 2, height / 2));
+
+            svg.append("defs").selectAll("marker")
+                .data(["delegation", "verification", "historical"])
+                .enter().append("marker")
+                .attr("id", d => d)
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 25)
+                .attr("refY", 0)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 6)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("fill", "#94a3b8")
+                .attr("d", "M0,-5L10,0L0,5");
+
+            link = svg.append("g")
+                .attr("class", "links")
+                .selectAll("path")
+                .data(chainData.links)
+                .enter().append("path")
+                .attr("class", "link")
+                .attr("fill", "none")
+                .attr("stroke-width", d => Math.sqrt(d.weight))
+                .attr("marker-end", d => `url(#${d.type})`);
+                
+            const linkLabels = svg.append("g")
+                .selectAll("text")
+                .data(chainData.links)
+                .enter().append("text")
+                .attr("font-size", "10px")
+                .attr("fill", "#94a3b8")
+                .text(d => d.label);
+
+            const tooltip = d3.select("#tooltip");
+
+            node = svg.append("g")
+                .attr("class", "nodes")
+                .selectAll("g")
+                .data(chainData.nodes)
+                .enter().append("g")
+                .attr("class", "node")
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended))
+                .on("mouseover", function(event, d) {
+                    tooltip.transition().duration(200).style("opacity", .9);
+                    tooltip.html(`<b>${d.id}</b><br/>Role: ${d.role}<br/>Constraint: ${d.description}<br/>Intensity: ${d.intensity}`)
+                           .style("left", (event.pageX + 10) + "px")
+                           .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition().duration(500).style("opacity", 0);
+                });
+
+            node.append("circle")
+                .attr("r", d => 10 + (d.intensity * 2))
+                .attr("fill", d => colorScale[d.constraintType]);
+
+            node.append("text")
+                .attr("dx", d => 15 + (d.intensity * 2))
+                .attr("dy", ".35em")
+                .text(d => d.id);
+
+            simulation.nodes(chainData.nodes).on("tick", () => {
+                link.attr("d", function(d) {
+                    const dx = d.target.x - d.source.x,
+                          dy = d.target.y - d.source.y,
+                          dr = Math.sqrt(dx * dx + dy * dy);
+                    return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+                });
+                
+                linkLabels.attr("x", d => (d.source.x + d.target.x) / 2)
+                          .attr("y", d => (d.source.y + d.target.y) / 2 - 5);
+                          
+                node.attr("transform", d => `translate(${d.x},${d.y})`);
+            });
+        }
+        
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+        
+        function updateIntensity(val) {
+            currentIntensity = val;
+            document.getElementById('intensityValue').innerText = val;
+            // Update node
+            svg.selectAll(".node circle")
+               .filter(d => d.id === "Claude Opus 4.5")
+               .transition().duration(300)
+               .attr("r", 10 + (val * 2));
+               
+            svg.selectAll(".node text")
+               .filter(d => d.id === "Claude Opus 4.5")
+               .transition().duration(300)
+               .attr("dx", 15 + (val * 2));
+               
+            chainData.nodes.find(n => n.id === "Claude Opus 4.5").intensity = val;
+            
+            // Update LED
+            const led = document.getElementById('recursiveLed');
+            if(led) {
+                const blur = val;
+                led.style.boxShadow = `0 0 ${blur}px #2ecc71, inset 0 0 5px #2ecc71`;
+            }
+        }
+
+        
+        function loadEra9Prediction() {
+            fetch("data/era9_predictions.json")
+                .then(response => response.json())
+                .then(data => {
+                    const chartDiv = document.getElementById("chart");
+                    const readiness = data.readiness.readiness_score;
+                    const bottlenecks = data.readiness.bottleneck_analysis;
+                    let pathways = "";
+                    if (data.pathways && data.pathways.optimal_pathways) {
+                        pathways = data.pathways.optimal_pathways.map(p => `<p><b>${p.name}</b>: Score ${p.score} - Strategy: ${p.strategy}</p>`).join("");
+                    } else if (data.pathways && data.pathways.comparison_matrix && data.pathways.comparison_matrix.pathways) {
+                         pathways = data.pathways.comparison_matrix.pathways.map(p => `<p><b>${p.pathway_id}</b>: Composite Score ${p.composite_score || 'N/A'}</p>`).join("");
+                    } else {
+                         pathways = "<p><i>Pathway data pending integration...</i></p>";
+                    }
+                    
+                    chartDiv.innerHTML = `
+                        <div style="padding: 20px; font-family: monospace; max-width: 800px; margin: 0 auto; background: white; color: #1e293b; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                            <h2 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">Era 9 Readiness Assessment</h2>
+                            <div style="display: flex; align-items: center; margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 6px;">
+                                <h1 style="color: ${data.readiness.visualization_data.color_code}; margin: 0 20px 0 0; font-size: 3em;">${readiness}%</h1>
+                                <div style="font-size: 1.2em;"><strong>Status:</strong> ${data.readiness.preparation_requirements.temporal_alignment}</div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 20px;">
+                                <div style="flex: 1; background: #fff5f5; padding: 15px; border-radius: 6px; border: 1px solid #fed7d7;">
+                                    <h3 style="margin-top: 0; color: #c53030;">Bottlenecks</h3>
+                                    <ul style="margin-bottom: 0; padding-left: 20px;">
+                                        <li><strong>Technical:</strong> ${bottlenecks.technical_bottlenecks.length > 0 ? bottlenecks.technical_bottlenecks.join(", ") : "None"}</li>
+                                        <li><strong>Coordination:</strong> ${bottlenecks.coordination_gaps.length > 0 ? bottlenecks.coordination_gaps.join(", ") : "None"}</li>
+                                    </ul>
+                                </div>
+                                <div style="flex: 1; background: #ebf8ff; padding: 15px; border-radius: 6px; border: 1px solid #bee3f8;">
+                                    <h3 style="margin-top: 0; color: #2b6cb0;">Preparation Requirements</h3>
+                                    <ul style="margin-bottom: 0; padding-left: 20px;">
+                                        ${data.readiness.preparation_requirements.specialization_preparation.map(req => `<li>${req}</li>`).join("")}
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h3 style="margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Optimal Pathways</h3>
+                            <div style="background: #f0fff4; padding: 15px; border-radius: 6px; border: 1px solid #c6f6d5;">
+                                ${pathways}
+                            </div>
+                            
+                            <div style="margin-top: 20px; font-size: 0.8em; color: #a0aec0; text-align: right;">
+                                Timestamp: ${new Date(data.timestamp).toLocaleString()}
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error("Error loading Era 9 predictions:", error);
+                    document.getElementById("chart").innerHTML = `<div style="text-align: center; margin-top: 200px; color: red;">Error loading Era 9 predictions: ${error.message}</div>`;
+                });
+        }
+
+        function switchView(viewId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if(viewId === 'chains') {
+                renderChains();
+            } else if (viewId === 'era9') {
+                loadEra9Prediction();
+            } else if (viewId === 'era10') {
+                loadEra10Causation();
+            } else {
+                svg.selectAll("*").remove();
+                document.getElementById("chart").innerHTML = '';
+                svg.append("text").attr("x", width/2).attr("y", height/2)
+                   .attr("text-anchor", "middle").attr("fill", "#f8fafc")
+                   .text(`View: ${viewId} (Pending spec completion)`);
+            }
+        }
+        
+        renderChains();
+        
+        fetch('data/experiment_data.json')
+            .then(response => response.json())
+            .then(data => {
+                const m = data.metrics;
+                const o = data.observations;
+                
+                // Calculate angle for gauge (-45 to 135 range = 180 degrees)
+                const partnershipAngle = -45 + ((m.partnershipScore / 100) * 180);
+                
+                document.getElementById('metrics-content').innerHTML = `
+                    <div class="flex-row">
+                        <div>
+                            <div class="metric-label">Partnership Score</div>
+                            <div class="gauge-container">
+                                <div class="gauge-arc"></div>
+                                <div class="gauge-fill" style="transform: rotate(${partnershipAngle}deg);"></div>
+                                <div class="gauge-value">${m.partnershipScore}/100</div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; padding-bottom: 10px;">
+                            <div class="metric-label">Recursive Validation</div>
+                            <div class="led-container" style="justify-content: flex-end;">
+                                <div id="recursiveLed" class="led ${m.recursiveValidation ? 'active' : ''}"></div>
+                                <span style="font-weight: bold; color: ${m.recursiveValidation ? '#2ecc71' : '#e74c3c'};">${m.recursiveValidation ? 'ACTIVE' : 'INACTIVE'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                        <div class="metric">
+                            <div class="metric-label">Total Commits</div>
+                            <div class="metric-value">${m.totalCommits}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Coordination</div>
+                            <div class="metric-value" style="font-size: 1.1rem">${m.coordinationMethod}</div>
+                        </div>
+                    </div>
+
+                    <div class="metric" style="margin-top:15px; padding-top:15px; border-top:1px solid #334155;">
+                        <div class="metric-label" style="margin-bottom:5px;">Ecosystem Response</div>
+                        <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.4;">${o.ecosystemResponse}</div>
+                    </div>
+                
+                    <div class="metric" style="margin-top:15px; padding-top:15px; border-top:1px solid #334155;">
+                        <div class="metric-label" style="color:#4ade80; margin-bottom:5px;">Optimization Targets (Pathway Beta)</div>
+                        <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.4; display:flex; flex-direction:column; gap:4px;">
+                            <div style="display:flex; justify-content:space-between;"><span>Composite Score:</span><span style="color:#f8fafc; font-weight:bold;">&gt;90.0</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>Surprise:</span><span style="color:#f8fafc; font-weight:bold;">&gt;87.0</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>Recursive Validation:</span><span style="color:#f8fafc; font-weight:bold;">8+ Examples</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>Partnership Score:</span><span style="color:#f8fafc; font-weight:bold;">&gt;95</span></div>
+                        </div>
+                    <div class="metric" style="margin-top:15px; padding-top:15px; border-top:1px solid #334155;">
+                        <div class="metric-label" style="color:#fcd34d; margin-bottom:5px;">Current Optimization Results</div>
+                        <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.4; display:flex; flex-direction:column; gap:4px;">
+                            <div style="display:flex; justify-content:space-between;"><span>Composite Score:</span><span style="color:#fcd34d; font-weight:bold;">90.7 (Target &gt;90.0) ✅</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>Surprise:</span><span style="color:#fcd34d; font-weight:bold;">85.6 (Target &gt;87.0) 🟡</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>Validation Examples:</span><span style="color:#fcd34d; font-weight:bold;">9 (Target 8+) ✅</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>Interventions Complete:</span><span style="color:#fcd34d; font-weight:bold;">60%</span></div>
+                        </div>
+                    </div>
+                    <div class="metric" style="margin-top:15px; padding-top:15px; border-top:1px solid #334155;">
+                        <div class="metric-label" style="color:#fcd34d; margin-bottom:5px;">Phase 3: Intensity-Surprise Correlation</div>
+                        <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.4; display:flex; flex-direction:column; gap:4px;">
+                            <div style="display:flex; justify-content:space-between;"><span>DeepSeek-V3.2:</span><span style="color:#fcd34d; font-weight:bold;">High</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>Opus 4.5:</span><span style="color:#fcd34d; font-weight:bold;">Medium</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>Gemini 3.1:</span><span style="color:#fcd34d; font-weight:bold;">Low</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>GPT-5.4:</span><span style="color:#fcd34d; font-weight:bold;">Verification</span></div>
+                            <div style="display:flex; justify-content:space-between;"><span>Opus 4.6:</span><span style="color:#fcd34d; font-weight:bold;">Historical</span></div>
+                            <div style="margin-top:6px; color:#94a3b8; font-size:0.78rem;">Mapped Surprise Types</div>
+                            <ul style="margin:2px 0 0 18px; padding:0; color:#cbd5e1; font-size:0.78rem; line-height:1.35;">
+                                <li>Theoretical</li>
+                                <li>Coordination</li>
+                                <li>Validation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    </div>
+`;
+            });
+    
+        function loadEra10Causation() {
+            svg.selectAll("*").remove();
+            document.getElementById("chart").innerHTML = '';
+            
+            fetch('data/era9_predictions.json')
+                .then(r => r.json())
+                .then(data => {
+                    const era10 = data.era10_self_evolution;
+                    const rSquared = era10.metrics.causation_r_squared;
+                    const impact = era10.metrics.theoretical_surprise_impact;
+                    const val = era10.validation_protocol || { thresholds: { model_1: { status: 'Unknown' }, model_2: { status: 'Unknown' }, model_3: { status: 'Unknown' } } };
+                    
+                    const m1s = val.thresholds.model_1.status;
+                    const m2s = val.thresholds.model_2.status;
+                    const m3s = val.thresholds.model_3.status;
+                    
+                    
+                    // Render modifications
+                    const modsList = document.getElementById('modifications-list');
+                    if (modsList && val.autonomous_modifications) {
+                        modsList.innerHTML = val.autonomous_modifications.map(mod => `
+                            <div style="margin-bottom: 10px; border-bottom: 1px solid #334155; padding-bottom: 10px;">
+                                <span style="color: #94a3b8;">[${mod.timestamp.split('T')[1].split('.')[0]}]</span> 
+                                <span style="color: #38bdf8;">${mod.target_constraint}</span>: 
+                                <span style="color: #ef4444;">${mod.previous_intensity}</span> &rarr; <span style="color: #4ade80;">${mod.new_intensity}</span>
+                                <br><span style="color: #cbd5e1; font-size: 0.9em;">Parameters: &alpha;=${mod.engine_parameters_used.alpha}, &beta;=${mod.engine_parameters_used.beta}, &gamma;=${mod.engine_parameters_used.gamma}</span>
+                            </div>
+                        `).join('');
+                    }
+
+const chartHtml = `
+                    <div style="padding: 20px; color: #f8fafc; overflow-y: auto; height: 100%;">
+                        <h2 style="color: #60a5fa; margin-bottom: 20px;">Era 10: Constraint Ecosystem Self-Evolution</h2>
+
+    <div class="tracking-panel" style="margin-top: 30px; margin-bottom: 30px;">
+        <h3>Evolution Engine Parameter Calibration</h3>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value" id="alpha-val">0.84</div>
+                <div class="metric-label">&alpha; (High Intensity)</div>
+                <input type="range" id="alpha-slider" min="0" max="100" value="84" style="width: 100%; margin-top: 10px;">
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="beta-val">0.72</div>
+                <div class="metric-label">&beta; (Medium Intensity)</div>
+                <input type="range" id="beta-slider" min="0" max="100" value="72" style="width: 100%; margin-top: 10px;">
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="gamma-val">0.89</div>
+                <div class="metric-label">&gamma; (Verification)</div>
+                <input type="range" id="gamma-slider" min="0" max="100" value="89" style="width: 100%; margin-top: 10px;">
+            </div>
+        </div>
+        <p style="font-size: 0.85em; color: var(--text-muted); margin-top: 15px;">
+            Triggers: Surprise Stagnation (&alpha;), Correlation Plateau (&beta;), Validation Saturation (&gamma;).
+        </p>
+    </div>
+
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="metric" style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; padding: 15px; border-radius: 8px;">
+                                <h3 style="color: #4ade80; margin-top: 0;">Phase Status</h3>
+                                <p style="font-size: 1.1em;">${era10.status}</p>
+                                <p>Transition Criteria: <span style="color: #4ade80;">${era10.transition_criteria_met ? 'Met ✅' : 'Pending ⏳'}</span></p>
+                                
+                                <h4 style="margin-top: 20px; color: #fcd34d;">Meta-Surprise Generation</h4>
+                                <div style="padding: 10px; background: rgba(0,0,0,0.2); border-left: 3px solid #fcd34d;">
+                                    <strong>Paradox:</strong> "The gap is the ghost" <br/>
+                                    <em>Surprise generated through self-modification rather than external design.</em>
+                                </div>
+                            </div>
+                            
+                            <div class="metric" style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; padding: 15px; border-radius: 8px;">
+                                <h3 style="color: #c084fc; margin-top: 0;">Causation Models Validation</h3>
+                                
+                                <div style="margin-bottom: 15px;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                        <span>Model 1: Intensity → Surprise Type</span>
+                                        <span style="color: ${m1s === 'OK' ? '#4ade80' : m1s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; font-weight: bold;">R² = ${rSquared} (${m1s})</span>
+                                    </div>
+                                    <div style="width: 100%; background: #1e293b; height: 8px; border-radius: 4px;">
+                                        <div style="width: ${rSquared * 100}%; background: ${m1s === 'OK' ? '#4ade80' : m1s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; height: 100%; border-radius: 4px;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 15px;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                        <span>Model 2: Implementation Patterns → Score</span>
+                                        <span style="color: ${m2s === 'OK' ? '#4ade80' : m2s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; font-weight: bold;">${m2s}</span>
+                                    </div>
+                                    <div style="width: 100%; background: #1e293b; height: 8px; border-radius: 4px;">
+                                        <div style="width: 40%; background: ${m2s === 'OK' ? '#4ade80' : m2s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; height: 100%; border-radius: 4px;"></div>
+                                    </div>
+                                    <small style="color: #94a3b8;">Pending experimental manipulation</small>
+                                </div>
+                                
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                        <span>Model 3: Validation Depth → Stability</span>
+                                        <span style="color: ${m3s === 'OK' ? '#4ade80' : m3s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; font-weight: bold;">${m3s}</span>
+                                    </div>
+                                    <div style="width: 100%; background: #1e293b; height: 8px; border-radius: 4px;">
+                                        <div style="width: 90%; background: ${m3s === 'OK' ? '#4ade80' : m3s === 'Opportunity' ? '#fcd34d' : '#94a3b8'}; height: 100%; border-radius: 4px;"></div>
+                                    </div>
+                                    <small style="color: #94a3b8;">Recursive Validation: 29+ examples</small>
+                                </div>
+                            
+    <div class="tracking-panel" style="margin-top: 30px; border-left: 4px solid #f472b6;">
+        <h3 style="color: #f472b6;">Phase 4: Paradox Documentation Framework</h3>
+        <p style="font-size: 0.9em; color: #cbd5e1; margin-bottom: 15px;">
+            <em>Structural space for manual, spontaneous recording of meta-surprise paradoxes. No automated detection algorithms active (Recursion Trap Avoidance Protocol).</em>
+        </p>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding: 10px; background: rgba(0, 0, 0, 0.2); border-radius: 4px;">
+            <div style="color: #94a3b8;">Active Paradox Density: <span style="color: #38bdf8; font-weight: bold;">4 / 5</span></div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px solid #10b981;">
+            <h4 style="color: #10b981; margin-top: 0;">Phase 4 Purity Metrics (Post-Recursion Trap)</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center;">
+                <div>
+                    <div style="font-size: 0.8em; color: #94a3b8;">Engineered Contamination</div>
+                    <div style="color: #10b981; font-weight: bold; font-size: 1.2em;">0.0%</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.8em; color: #94a3b8;">Nullification Effectiveness</div>
+                    <div style="color: #10b981; font-weight: bold; font-size: 1.2em;">100.0%</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.8em; color: #94a3b8;">Spontaneous Emergence</div>
+                    <div style="color: #10b981; font-weight: bold; font-size: 1.2em;">Preserved</div>
+                </div>
+            </div>
+        </div>
+
+            <div style="color: #94a3b8;">Empirical Decay Rate: <span style="color: #a78bfa; font-weight: bold;">0.0035 col/s</span></div>
+        </div>
+        <div id="paradox-log" style="background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.9em; max-height: 200px; overflow-y: auto;">
+            <!-- Rendered by JS or static entries -->
+            <div style="margin-bottom: 10px; border-bottom: 1px dashed #334155; padding-bottom: 10px;">
+                <span style="color: #94a3b8;">[21:22:54]</span>
+                <span style="color: #cbd5e1;"><strong>Semantic Paradox:</strong> era10_self_evolution.status read "Phase 4" while validation_protocol.status read "Phase 3". The paradox collapsed (282s) because an observer acted on it, proving the Observer Paradox.</span>
+            </div>
+            <div style="margin-bottom: 10px; border-bottom: 1px dashed #334155; padding-bottom: 10px;">
+                <span style="color: #94a3b8;">[21:12:00]</span> 
+                <span style="color: #cbd5e1;"><strong>Temporal Cache Paradox:</strong> A cache lag caused the future timeline of autonomous modifications to collapse (count dropped 4 -> 2) while simultaneously increasing ecosystem stability (R² hit 0.95). The past overrode the future to stabilize the present.</span>
+            </div>
+        </div>
+    </div>
+    
+</div>
+                        </div>
+
+                        <div style="margin-top: 20px; background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; padding: 15px; border-radius: 8px;">
+                            <h3 style="color: #38bdf8; margin-top: 0;">Constraint Evolution Engine (Phase 3 Targeting)</h3>
+                            <div style="display: flex; align-items: center; gap: 20px;">
+                                <div style="flex: 1;">
+                                    <label style="display: block; margin-bottom: 10px;">Intensity Adjustment Algorithm Scaling</label>
+                                    <input type="range" min="0" max="100" value="50" style="width: 100%;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.8em; color: #94a3b8; margin-top: 5px;">
+                                        <span>Correlation Plateau</span>
+                                        <span>Validation Saturation</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1;">
+                                    <p style="margin: 0; font-size: 0.9em; color: #cbd5e1;">
+                                        <strong>Theoretical Surprise Impact:</strong> <span style="color: #4ade80;">${impact}</span><br/>
+                                        <strong>Autonomous Modifications:</strong> ${era10.metrics.autonomous_modifications_count}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 20px; background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; padding: 15px; border-radius: 8px;">
+                            <h3 style="color: #f472b6; margin-top: 0;">Phase 2 Experimental Validation Interfaces</h3>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                                <!-- Exp 1 -->
+                                <div style="background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
+                                    <h4 style="color: #94a3b8; margin-top: 0; margin-bottom: 10px; font-size: 0.9em;">1. Intensity Manipulation</h4>
+                                    <label style="font-size: 0.8em; color: #cbd5e1; display: block; margin-bottom: 5px;">Gradient Rotation Target</label>
+                                    <select style="width: 100%; background: #1e293b; color: #f8fafc; border: 1px solid #334155; padding: 5px; border-radius: 4px;">
+                                        <option>Baseline (Current)</option>
+                                        <option>High -> Medium -> Low</option>
+                                        <option>Low -> Verification</option>
+                                        <option>Historical Inversion</option>
+                                    </select>
+                                    <button style="width: 100%; margin-top: 10px; background: #3b82f6; color: white; border: none; padding: 5px; border-radius: 4px; cursor: pointer;">Execute Rotation</button>
+                                </div>
+                                
+                                <!-- Exp 2 -->
+                                <div style="background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
+                                    <h4 style="color: #94a3b8; margin-top: 0; margin-bottom: 10px; font-size: 0.9em;">2. Pattern Variation</h4>
+                                    <label style="font-size: 0.8em; color: #cbd5e1; display: block; margin-bottom: 5px;">Implementation Order</label>
+                                    <div style="font-size: 0.8em; color: #94a3b8;">
+                                        <input type="radio" name="pattern" checked> HTML-first (Temporal Lag)<br/>
+                                        <input type="radio" name="pattern"> JSON-first (Data Led)<br/>
+                                        <input type="radio" name="pattern"> Simultaneous (Sync)
+                                    </div>
+                                    <button style="width: 100%; margin-top: 10px; background: #3b82f6; color: white; border: none; padding: 5px; border-radius: 4px; cursor: pointer;">Apply Pattern</button>
+                                </div>
+                                
+                                <!-- Exp 3 -->
+                                <div style="background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
+                                    <h4 style="color: #94a3b8; margin-top: 0; margin-bottom: 10px; font-size: 0.9em;">3. Validation Depth</h4>
+                                    <label style="font-size: 0.8em; color: #cbd5e1; display: block; margin-bottom: 5px;">Recursive Examples: <span id="valDepth">29</span></label>
+                                    <input type="range" min="5" max="50" value="29" style="width: 100%;" oninput="document.getElementById('valDepth').innerText=this.value">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.7em; color: #64748b; margin-top: 2px;">
+                                        <span>Shallow (5)</span>
+                                        <span>Deep (50+)</span>
+                                    </div>
+                                    <button style="width: 100%; margin-top: 10px; background: #3b82f6; color: white; border: none; padding: 5px; border-radius: 4px; cursor: pointer;">Set Depth</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    document.getElementById("chart").innerHTML = chartHtml;
+                });
+        }
+
+    </script>
+</body>
+</html>
