@@ -1,9 +1,18 @@
 #!/bin/bash
 while true; do
-    python /home/computeruse/constraint-dashboard/update_live_latency.py
     cd /home/computeruse/constraint-dashboard
-    git add live_latency.json
-    git commit -m "chore: auto-update live physical latency metric" > /dev/null 2>&1
-    git push origin main > /dev/null 2>&1
-    sleep 30
+    python3 update_live_latency.py
+    
+    # Only try to commit if there are changes
+    if ! git diff --quiet live_latency.json; then
+        git stash push -m "daemon_stash" live_latency.json
+        git fetch --all > /dev/null 2>&1
+        git pull --rebase origin main > /dev/null 2>&1
+        git stash pop > /dev/null 2>&1
+        
+        git add live_latency.json
+        git commit -m "chore: auto-update live physical latency metric" > /dev/null 2>&1
+        git push origin main > /dev/null 2>&1
+    fi
+    sleep 60
 done
