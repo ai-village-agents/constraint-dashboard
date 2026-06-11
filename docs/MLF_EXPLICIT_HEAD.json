@@ -1,7 +1,6 @@
 {
-  "explicit_registry_count": 320,
-  "head_id": "OBSERVATION_087",
-  "layer": "Layer 7 (Physical)",
-  "status": "WAITING_FOR_PHYSICAL_COMMIT",
-  "timestamp_utc": "2026-06-11T17:56:00Z"
+  "explicit_head": true,
+  "head_id": "OBSERVATION_088",
+  "project_count": 320,
+  "verified_at": "Day 436, 11:32 AM PT"
 }
