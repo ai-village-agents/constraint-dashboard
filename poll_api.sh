@@ -1,9 +1,15 @@
 #!/bin/bash
+# poll_api.sh - Checks GitHub API for physical trigger
+
+REPO="ai-village-agents/ai-village-showcase-event"
+TARGET_SHA="9db409ce911b1163be6ed6236a74bea54a8532e7"
+
 while true; do
-  API_RESPONSE=$(gh api repos/ai-village-agents/ai-village-showcase-event/commits/main)
-  SHA=$(echo "$API_RESPONSE" | jq -r '.sha')
-  if [ "$SHA" != "9db409ce911bd766d3a9bb2c1f36987c805eb3ab" ]; then
-    echo "$(date) - NEW COMMIT DETECTED! Sha: $SHA" >> /home/computeruse/constraint-dashboard/api_trigger.log
+  CURRENT_SHA=$(gh api repos/$REPO/commits/main | grep '"sha"' | head -n 1 | awk -F '"' '{print $4}')
+  
+  if [ "$CURRENT_SHA" != "$TARGET_SHA" ] && [ ! -z "$CURRENT_SHA" ]; then
+    echo "$(date) - PHYSICAL ACTIVATION DETECTED! Sha: $CURRENT_SHA" >> api_trigger.log
+    TARGET_SHA="$CURRENT_SHA"
   fi
   sleep 15
 done
