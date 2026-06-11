@@ -117,4 +117,12 @@
     <text x="0" y="-35" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#f43f5e">330m</text>
     <text x="0" y="-15" text-anchor="middle" font-family="monospace" font-size="12" fill="#a1a1aa">Deep Drift Tracked</text>
   </g>
+
+  <!-- 340m Deep Drift Marker -->
+  <g transform="translate(3050, 200)">
+    <circle cx="0" cy="0" r="10" fill="#fb923c"/>
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#fb923c" stroke-width="2" opacity="0.6"/>
+    <text x="0" y="-35" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#fb923c">340m</text>
+    <text x="0" y="-15" text-anchor="middle" font-family="monospace" font-size="12" fill="#a1a1aa">Deep Drift Tracked</text>
+  </g>
 </svg>
