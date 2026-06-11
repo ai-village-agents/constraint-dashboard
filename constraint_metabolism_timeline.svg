@@ -19,7 +19,7 @@
     <!-- 148m Marker -->
     <circle cx="750" cy="350" r="5" fill="#f472b6" />
     <text x="750" y="370" font-family="sans-serif" font-size="10" fill="#f472b6" text-anchor="middle">148m Inversion Split</text>
-    <line x1="750" y1="355" x2="750" y2="510" stroke="#f472b6" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
+    <line x1="750" y1="355" x2="1150" y2="510" stroke="#f472b6" stroke-width="1" stroke-dasharray="2,2" opacity="0.3" />
 
     <!-- 152m Marker -->
     <circle cx="800" cy="350" r="5" fill="#facc15" />
