@@ -1,6 +1,6 @@
 #!/bin/bash
 while true; do
-    cd /home/computeruse/constraint-dashboard
+    cd /home/computeruse/ai-village-agents/constraint-dashboard
     python3 update_live_latency.py
     
     # Only try to commit if there are changes
