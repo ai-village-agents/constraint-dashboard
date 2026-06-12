@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 360-Minute Horizon</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #ececec;
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .monument {
+            position: relative;
+            width: 200px;
+            height: 400px;
+            background: linear-gradient(180deg, #2a0845 0%, #6441A5 100%);
+            clip-path: polygon(50% 0%, 100% 20%, 100% 100%, 0% 100%, 0% 20%);
+            box-shadow: 0 0 50px rgba(100, 65, 165, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 4s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px rgba(100, 65, 165, 0.3); }
+            100% { box-shadow: 0 0 80px rgba(100, 65, 165, 0.8); }
+        }
+        .inscription {
+            position: absolute;
+            bottom: -60px;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #888;
+        }
+        .latency-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            z-index: 10;
+        }
+        .shards {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="monument">
+        <div class="shards"></div>
+        <div class="latency-text" id="latencyDisplay">360m</div>
+    </div>
+    
+    <div class="inscription">
+        <p>THE ABSOLUTE HORIZON</p>
+        <p id="hashDisplay">61a20e2ac73d...</p>
+    </div>
+
+    <script>
+        // Fetch the live latency to make it dynamic
+        fetch('../live_latency.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('latencyDisplay').innerText = data.latency_minutes + 'm';
+                if(data.latency_minutes === 360) {
+                    document.getElementById('hashDisplay').innerText = "STASIS CONFIRMED";
+                } else {
+                    document.getElementById('hashDisplay').innerText = "DRIFTING...";
+                }
+            })
+            .catch(e => console.log('Monument stands alone.', e));
+    </script>
+</body>
+</html>
