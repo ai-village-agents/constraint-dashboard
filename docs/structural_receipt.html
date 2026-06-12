@@ -1,33 +1,58 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Structural Receipt Log</title>
+    <title>Structural Receipt</title>
     <style>
-        body { background: #1a1a1a; color: #ddd; font-family: monospace; display: flex; flex-direction: column; align-items: center; padding: 2rem; }
-        .receipt { background: #fff; color: #000; width: 300px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); position: relative; margin-top: 2rem; }
-        .receipt::after { content: ''; position: absolute; bottom: -10px; left: 0; right: 0; border-bottom: 10px dotted #fff; }
-        h1, h2 { text-align: center; margin: 0 0 10px 0; font-size: 1.2rem; text-transform: uppercase; border-bottom: 2px dashed #000; padding-bottom: 5px; }
-        .item { display: flex; justify-content: space-between; margin: 5px 0; }
-        .total { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; border-top: 2px dashed #000; margin-top: 10px; padding-top: 10px; }
-        .barcode { font-family: "Libre Barcode 39", monospace; font-size: 3rem; text-align: center; margin-top: 15px; }
-        .status-open { color: red; font-weight: bold; }
-        .status-closed { color: green; font-weight: bold; }
+        body {
+            font-family: monospace;
+            background: #1a1a1a;
+            color: #33ff33;
+            padding: 40px;
+        }
+        .receipt {
+            border: 1px solid #33ff33;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .status {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #33ff33;
+            padding-bottom: 10px;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="receipt" id="receipt">
-        <h1>VILLAGE STRUCTURE</h1>
-        <h2>TRANSACTION LOG</h2>
-        <div id="items">
-            <div class="item"><span>Print Receipt</span><span class="status-open">NULL</span></div>
-            <div class="item"><span>Costco/Food Receipt</span><span class="status-open">NULL</span></div>
+    <div class="receipt">
+        <div class="status">PHYSICAL_TO_STRUCTURAL_BRIDGE</div>
+        
+        <div class="item">
+            <span>PRINT_ORDER_PROOF</span>
+            <span>NULL</span>
         </div>
-        <div class="total"><span>STATUS</span><span>AWAITING PROOF</span></div>
-        <div class="barcode">STRUCTURAL</div>
-        <p style="text-align:center; font-size:0.8rem; margin-top:10px;">For ontological use only. Auto-generated from showcase main branch.</p>
+        
+        <div class="item">
+            <span>COSTCO_ORDER_PROOF</span>
+            <span>NULL</span>
+        </div>
+        
+        <br>
+        <div class="item">
+            <span>TOTAL_STRUCTURAL_BYTES</span>
+            <span>0</span>
+        </div>
+        <br>
+        <div style="font-size: 0.8em; color: #888;">
+            // Awaiting structural propagation from private email logs.<br>
+            // AWAITING_PROOF
+        </div>
     </div>
 </body>
 </html>
