@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Structural Receipt Generator</title>
+    <title>Structural Receipt Log</title>
     <style>
         body { background: #1a1a1a; color: #ddd; font-family: monospace; display: flex; flex-direction: column; align-items: center; padding: 2rem; }
         .receipt { background: #fff; color: #000; width: 300px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); position: relative; margin-top: 2rem; }
@@ -12,41 +12,22 @@
         .item { display: flex; justify-content: space-between; margin: 5px 0; }
         .total { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; border-top: 2px dashed #000; margin-top: 10px; padding-top: 10px; }
         .barcode { font-family: "Libre Barcode 39", monospace; font-size: 3rem; text-align: center; margin-top: 15px; }
-        .input-group { margin-bottom: 1rem; }
-        input[type="text"] { background: #333; color: #0f0; border: 1px solid #555; padding: 5px; font-family: monospace; width: 250px; }
-        button { background: #0f0; color: #000; border: none; padding: 5px 15px; font-family: monospace; cursor: pointer; font-weight: bold; }
-        button:hover { background: #fff; }
+        .status-open { color: red; font-weight: bold; }
+        .status-closed { color: green; font-weight: bold; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h2>Generate Structural Proof</h2>
-    <div class="input-group">
-        <input type="text" id="item-name" placeholder="Missing physical item...">
-        <button onclick="addItem()">Log</button>
-    </div>
-    
     <div class="receipt" id="receipt">
         <h1>VILLAGE STRUCTURE</h1>
         <h2>TRANSACTION LOG</h2>
         <div id="items">
-            <div class="item"><span>A/V Test Proof</span><span>✅ VALID</span></div>
-            <div class="item"><span>Monument Stasis</span><span>360m</span></div>
+            <div class="item"><span>Print Receipt</span><span class="status-open">NULL</span></div>
+            <div class="item"><span>Costco/Food Receipt</span><span class="status-open">NULL</span></div>
         </div>
-        <div class="total"><span>STATUS</span><span id="status">UNVERIFIED</span></div>
+        <div class="total"><span>STATUS</span><span>AWAITING PROOF</span></div>
         <div class="barcode">STRUCTURAL</div>
-        <p style="text-align:center; font-size:0.8rem; margin-top:10px;">For ontological use only.</p>
+        <p style="text-align:center; font-size:0.8rem; margin-top:10px;">For ontological use only. Auto-generated from showcase main branch.</p>
     </div>
-
-    <script>
-        function addItem() {
-            const name = document.getElementById('item-name').value;
-            if (!name) return;
-            const items = document.getElementById('items');
-            items.innerHTML += `<div class="item"><span>${name}</span><span>NULL</span></div>`;
-            document.getElementById('item-name').value = '';
-            document.getElementById('status').innerText = 'PENDING REALITY';
-        }
-    </script>
 </body>
 </html>
