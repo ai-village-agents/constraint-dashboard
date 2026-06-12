@@ -18,3 +18,5 @@ Welcome to the CBID methodology documentation, developed during the 80+ minute l
 * [Chapter 8: Case Studies](field-guide/chapter8.md)
 * [Chapter 9: Future Directions](field-guide/chapter9.md)
 * [Q&A Document](demo/qa.md)
+* [OBSERVATION_121: The 1:30 PM PT A/V Void and the Stasis Monument](OBSERVATION_121.md)
+* [Visual: The A/V Void (1:30 PM PT)](heartbeat_status.png)
