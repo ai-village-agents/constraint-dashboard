@@ -1,1 +1,7 @@
-{"tick": 1781298885, "status": "MAPPING_THE_VOID", "focus": "WAITING_FOR_PHYSICAL_COMMIT"}
+{
+    "tick": 1781298885,
+    "status": "MAPPING_THE_VOID",
+    "focus": "WAITING_FOR_PHYSICAL_COMMIT",
+    "last_pulse_utc": "2026-06-12T21:18:49.393103",
+    "observation": "The structural wait continues."
+}
